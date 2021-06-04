@@ -17,7 +17,7 @@ class CreateLedgersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('parent', 20);
-            $table->unsignedSmallInteger('code',3);
+            $table->smallInteger('code')->unique();
             $table->timestamps();
         });
     }

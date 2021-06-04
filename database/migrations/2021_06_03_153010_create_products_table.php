@@ -40,8 +40,7 @@ class CreateProductsTable extends Migration
             $table->string('is_active');
             $table->string('is_feature');
             $table->timestamps();
-            $table->foreign('product_category_id')->references('id')->on('product_categories');
-            $table->foreignId('product_category_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('product_category_id')->references('id')->on('product_categories')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

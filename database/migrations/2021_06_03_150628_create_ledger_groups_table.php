@@ -15,8 +15,9 @@ class CreateLedgerGroupsTable extends Migration
     {
         Schema::create('ledger_groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedSmallInteger('start_range', 3);
-            $table->unsignedSmallInteger('end_range', 3);
+            $table->string('name');
+            $table->unsignedSmallInteger('start_range');
+            $table->unsignedSmallInteger('end_range');
             $table->char('normal_balance', 1)->default('D');
             $table->timestamps();
         });

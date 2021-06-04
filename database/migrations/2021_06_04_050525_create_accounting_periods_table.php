@@ -21,8 +21,7 @@ class CreateAccountingPeriodsTable extends Migration
             $table->date('end_date');
             $table->boolean('locked')->default(0);
             $table->timestamps();
-            $table->foreign('financial_year_id')->references('id')->on('financial_years');
-            $table->foreignId('financial_year_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('financial_year_id')->references('id')->on('financial_years')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
