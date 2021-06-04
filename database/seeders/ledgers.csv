@@ -1,0 +1,122 @@
+"1","Sales Income","Income","150",NULL,NULL
+"2","Interest Received","Income","182",NULL,NULL
+"3","Sundry Income","Income","190",NULL,NULL
+"4","Unassigned Receipts","Income","195",NULL,NULL
+"5","Commissions Paid","Expenses","207",NULL,NULL
+"6","COS (Cost Of Sale) surchases","Expenses","210",NULL,NULL
+"7","Direct Selling Costs","Expenses","214",NULL,NULL
+"8","Operating Costs","Expenses","228",NULL,NULL
+"9","Freight Costs","Expenses","274",NULL,NULL
+"10","Inventory Adjustment","Expenses","276",NULL,NULL
+"11","Packaging Costs","Expenses","280",NULL,NULL
+"12","Accounting","Expenses","300",NULL,NULL
+"13","Admin and Magement Accounting","Expenses","302",NULL,NULL
+"14","Advertising &amp; Promotions","Expenses","304",NULL,NULL
+"15","Bank Charges","Expenses","312",NULL,NULL
+"16","Computer Expenses","Expenses","332",NULL,NULL
+"17","Courier &amp; Postage","Expenses","341",NULL,NULL
+"18","Credit Card Expenses","Expenses","342",NULL,NULL
+"19","Depreciation","Expenses","347",NULL,NULL
+"20","Directors Fees &amp; Remuneration","Expenses","350",NULL,NULL
+"21","Electricity, Water &amp; Gas","Expenses","362",NULL,NULL
+"22","Entertainment &amp; Meals","Expenses","365",NULL,NULL
+"23","Finance Centeres Banking","Expenses","368",NULL,NULL
+"24","General Expenses","Expenses","371",NULL,NULL
+"25","Insurance Security","Expenses","380",NULL,NULL
+"26","Insurance Life (Personal)","Expenses","382",NULL,NULL
+"27","Interest Paid","Expenses","383",NULL,NULL
+"28","Leasing/Rental","Expenses","388",NULL,NULL
+"29","Members Salaries","Expenses","416",NULL,NULL
+"30","Motor Vehicle Expenses","Expenses","421",NULL,NULL
+"31","Motor V: Fuel &amp; Oil","Expenses","422",NULL,NULL
+"32","Office Expenses: Consumables","Expenses","424",NULL,NULL
+"33","Printing &amp; Stationery","Expenses","433",NULL,NULL
+"34","Rates &amp; Taxes","Expenses","439",NULL,NULL
+"35","Rent Paid","Expenses","442",NULL,NULL
+"36","Repairs &amp; Maintenance","Expenses","444",NULL,NULL
+"37","Salaries &amp; Wages","Expenses","451",NULL,NULL
+"38","Security","Expenses","454",NULL,NULL
+"39","Subscriptions and membership fees","Expenses","472",NULL,NULL
+"40","Sundry Expenses","Expenses","475",NULL,NULL
+"41","Telephone and Internet","Expenses","478",NULL,NULL
+"42","Travel &amp; Accommodation","Expenses","481",NULL,NULL
+"43","Unassigned Payments","Expenses","483",NULL,NULL
+"44","Normal Taxation","Expenses","490",NULL,NULL
+"45","Dividend Profit/Loss Distribution","Expenses","495",NULL,NULL
+"46","Capital Account","Retained","510",NULL,NULL
+"47","Owners/Partners Drawings","Retained","516",NULL,NULL
+"48","Reserves - Non-distributable","Retained","527",NULL,NULL
+"49","Retained Income / (Accumulated Loss)","Retained","534",NULL,NULL
+"50","Share Capital / Members Contribution","Retained","537",NULL,NULL
+"51","Computer Equipment","Assets","608",NULL,NULL
+"52","Computer Equipment: Accum Dep","Assets","609",NULL,NULL
+"53","Computer Equipment: At Cost","Assets","610",NULL,NULL
+"54","Computer Equipment: Accum Appreciation","Assets","611",NULL,NULL
+"55","Equipment / Machinery","Assets","620",NULL,NULL
+"56","Equipment / Machinery: Accum Dep","Assets","621",NULL,NULL
+"57","Equipment / Machinery: At Cost","Assets","622",NULL,NULL
+"58","Equipment / Machinery: Accum Appreciation","Assets","623",NULL,NULL
+"59","Furniture &amp; Fittings","Assets","624",NULL,NULL
+"60","Furniture &amp; Fittings: Accum Dep","Assets","625",NULL,NULL
+"61","Furniture &amp; Fittings: At Cost","Assets","626",NULL,NULL
+"62","Furniture &amp; Fittings: Accum Appreciation","Assets","627",NULL,NULL
+"63","Land &amp; Buildings","Assets","628",NULL,NULL
+"64","Land &amp; Buildings: Accum Dep","Assets","629",NULL,NULL
+"65","Land &amp; Buildings: At Cost","Assets","630",NULL,NULL
+"66","Land &amp; Buildings: Accum Appreciation","Assets","631",NULL,NULL
+"67","Leasehold Improvements","Assets","632",NULL,NULL
+"68","Leasehold Improvements: Accum Depr","Assets","633",NULL,NULL
+"69","Leasehold Improvements: At Cost","Assets","634",NULL,NULL
+"70","Leasehold Improvements: Accum Appreciation","Assets","635",NULL,NULL
+"71","Motor Vehicles","Assets","644",NULL,NULL
+"72","Motor Vehicles: Accum Dep","Assets","645",NULL,NULL
+"73","Motor Vehicles: At Cost","Assets","646",NULL,NULL
+"74","Motor Vehicles: Accum Appreciation","Assets","647",NULL,NULL
+"75","Office Equipment","Assets","648",NULL,NULL
+"76","Office Equipment: Accum Dep","Assets","649",NULL,NULL
+"77","Office Equipment: At Cost","Assets","650",NULL,NULL
+"78","Office Equipment: Accum Appreciation","Assets","651",NULL,NULL
+"79","Other Fixed Assets","Assets","660",NULL,NULL
+"80","Other Fixed Assets: Accum Dep","Assets","661",NULL,NULL
+"81","Other Fixed Assets: At Cost","Assets","662",NULL,NULL
+"82","Other Fixed Assets: Accum Appreciation","Assets","663",NULL,NULL
+"83","Goodwill / Intangible Assets","Assets","680",NULL,NULL
+"84","Goodwill / Intangible Assets: At Cost","Assets","681",NULL,NULL
+"85","Goodwill / Intangible Assets: Accum Depr","Assets","682",NULL,NULL
+"86","Goodwill / Intangible Assets: Accum Appreciation","Assets","683",NULL,NULL
+"87","Investments / Deposits","Assets","755",NULL,NULL
+"88","Investments: Other","Assets","760",NULL,NULL
+"89","Loans (Subsidiary Co.) To / (From): ","Assets","770",NULL,NULL
+"90","Loans Receivable","Assets","775",NULL,NULL
+"91","Shares in Subsidiary Companies","Assets","790",NULL,NULL
+"92","Bank: Business Cheque Account","Assets","835",NULL,"2019-01-01 18:45:16"
+"93","Bank:  Inter-account Transfers","Assets","836",NULL,NULL
+"94","Bank: Cash","Assets","845",NULL,"2019-01-01 18:39:15"
+"95","Customer (Debtor) Control","Assets","850",NULL,NULL
+"96","Customers: Sundry","Assets","855",NULL,NULL
+"97","Inventory Control","Assets","865",NULL,NULL
+"98","Provision For Doubtful Debts","Assets","885",NULL,NULL
+"99","Share Holders/ Directors/ Members Loans","Liability","920",NULL,NULL
+"100","Instalment Sale Creditors","Liability","925",NULL,NULL
+"101","Liabilities: Long Term","Liability","900",NULL,NULL
+"102","Liabilities: Long Term: Other","Liability","905",NULL,NULL
+"103","Prepayments / Deferred Expenses","Liability","910",NULL,NULL
+"104","Accrued Expenses","Liability","915",NULL,NULL
+"105","Liabilities: Current: Other","Liability","945",NULL,NULL
+"106","Provision for Future Expenses","Liability","950",NULL,NULL
+"107","Salary &amp; Wages Control","Liability","955",NULL,NULL
+"108","Supplier (Creditor) Control","Liability","960",NULL,NULL
+"109","Suppliers: Sundry","Liability","965",NULL,NULL
+"110","Suppliers: Sundry: Accounting / Audit","Liability","966",NULL,NULL
+"111","Suppliers: Sundry: Other Accruals","Liability","967",NULL,NULL
+"112","Tax Provision","Liability","970",NULL,NULL
+"113","Taxation Payable","Liability","975",NULL,NULL
+"114","VAT  Provision","Liability","980",NULL,NULL
+"115","VAT / Tax Control","Liability","985",NULL,NULL
+"116","VAT: Input VAT","Liability","986",NULL,NULL
+"117","VAT: Output VAT","Liability","987",NULL,NULL
+"118","Suspense","Liability","990",NULL,NULL
+"119","Unassigned","Liability","991",NULL,NULL
+"120","Legal Fees","Expenses","390",NULL,NULL
+"121","Bank: Ikhoka","Assets","846","2019-01-01 18:43:47","2019-01-01 18:45:02"
+"122","Bank: PayFast","Assets","847","2019-01-13 06:51:30","2019-01-13 06:51:30"
