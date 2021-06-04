@@ -19,8 +19,7 @@ class CreateProductOptionsTable extends Migration
             $table->string('name');
             $table->double('add_to_price_excl');
             $table->timestamps();
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

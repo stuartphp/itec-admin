@@ -20,15 +20,13 @@ class CreateLedgerTransactionsTable extends Migration
             $table->string('description');
             $table->unsignedBigInteger('document_id');
             $table->char('gcs', 1)->default('G');
-            $table->unsignedSmallInteger('ledger', 3);
+            $table->unsignedSmallInteger('ledger');
             $table->double('debit_amount')->nullable();
             $table->double('credit_amount')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('entity_id')->references('id')->on('entities');
-            $table->foreignId('entity_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('document_id')->references('id')->on('documents');
-            $table->foreignId('document_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('entity_id')->references('id')->on('entities')->cascadeOnDelete()->cascadeOnDelete();
+            $table->foreign('document_id')->references('id')->on('documents')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

@@ -17,10 +17,9 @@ class CreateProductImagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->string('image');
-            $table->unsignedTinyInteger('sort_order',2);
+            $table->unsignedTinyInteger('sort_order');
             $table->timestamps();
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

@@ -19,13 +19,11 @@ class CreateProductReviewsTable extends Migration
             $table->unsignedBigInteger('entity_id');
             $table->date('action_date');
             $table->string('alias');
-            $table->unsignedTinyInteger('rating',1);
+            $table->unsignedTinyInteger('rating');
             $table->boolean('is_active')->default(0);
             $table->timestamps();
-            $table->foreign('entity_id')->references('id')->on('entities');
-            $table->foreignId('entity_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('entity_id')->references('id')->on('entities')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

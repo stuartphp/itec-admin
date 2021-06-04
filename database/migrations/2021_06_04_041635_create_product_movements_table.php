@@ -21,10 +21,8 @@ class CreateProductMovementsTable extends Migration
             $table->unsignedInteger('up')->nullable();
             $table->unsignedInteger('down')->nullable();
             $table->timestamps();
-            $table->foreign('document_id')->references('id')->on('documents');
-            $table->foreignId('document_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('document_id')->references('id')->on('documents')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

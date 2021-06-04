@@ -20,8 +20,7 @@ class CreateProductStatsTable extends Migration
             $table->char('month',2);
             $table->unsignedInteger('total');
             $table->timestamps();
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

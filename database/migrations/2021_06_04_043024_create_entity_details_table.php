@@ -28,8 +28,7 @@ class CreateEntityDetailsTable extends Migration
             $table->string('beneficiary_mobile')->nullable();
             $table->string('beneficiary_website')->nullable();
             $table->timestamps();
-            $table->foreign('entity_id')->references('id')->on('entities');
-            $table->foreignId('entity_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('entity_id')->references('id')->on('entities')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
