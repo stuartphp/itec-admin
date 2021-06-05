@@ -19,8 +19,7 @@
 <div class="container-xl px-4 mt-4">
     <!-- Account page navigation-->
     <nav class="nav nav-borders">
-        <a class="nav-link active ms-0" href="account-profile.html">Profile</a>
-        <a class="nav-link" href="account-billing.html">Billing</a>
+        <a class="nav-link active ms-0" href="/admin/users/profile">Profile</a>
         <a class="nav-link" href="account-security.html">Security</a>
         <a class="nav-link" href="account-notifications.html">Notifications</a>
     </nav>
@@ -40,12 +39,12 @@
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputFirstName">First name</label>
-                                <input class="form-control form-control-sm" id="inputFirstName" type="text" name="firstname" value="{{ $data->firstname }}" />
+                                <input class="form-control form-control-sm" id="inputFirstName" type="text" name="firstname" value="{{ auth()->user()->firstname }}" />
                             </div>
                             <!-- Form Group (last name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputLastName">Last name</label>
-                                <input class="form-control form-control-sm" id="inputLastName" type="text" name="lastname" value="{{ $data->lastname }}" />
+                                <input class="form-control form-control-sm" id="inputLastName" type="text" name="lastname" value="{{ auth()->user()->lastname }}" />
                             </div>
                         </div>
                         <!-- Form Row        -->
@@ -56,7 +55,7 @@
                                     <label class="small mb-1" for="title">Title</label>
                                     <select class="form-control form-control-sm @error('title') is-invalid @enderror" id="title" name="title">
                                         @foreach (__('global.title') as $k=>$v )
-                                        <option value="{{ $k }}" @if($data->title == $k) selected @endif>({{ $k }}) {{ $v }}</option>
+                                        <option value="{{ $k }}" @if(auth()->user()->title == $k) selected @endif>({{ $k }}) {{ $v }}</option>
                                         @endforeach
                                     </select>
                                     @error('title')
@@ -69,7 +68,7 @@
                             <div class="col-md-6">
                                 <!-- Form Group (last name)-->
                                     <label class="small mb-1" for="mobile_number">Mobile Number</label>
-                                    <input class="form-control form-control-sm @error('mobile_number') is-invalid @enderror"  id="mobile_number" type="number" placeholder="0821234567" name="mobile_number" value="{{ $data->mobile_number }}" required autocomplete="mobile_number" />
+                                    <input class="form-control form-control-sm @error('mobile_number') is-invalid @enderror"  id="mobile_number" type="number" placeholder="0821234567" name="mobile_number" value="{{ auth()->user()->mobile_number }}" required autocomplete="mobile_number" />
                                     @error('mobile_number')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -81,26 +80,26 @@
                         <!-- Form Group (email address)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control form-control-sm" id="inputEmailAddress" type="email" name="email" value="{{ $data->email }}" />
+                            <input class="form-control form-control-sm" id="inputEmailAddress" type="email" name="email" value="{{ auth()->user()->email }}" />
                         </div>
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputPhone">Phone number</label>
-                                <input class="form-control form-control-sm" id="inputPhone" type="text" name="phone_number" value="{{ $data->phone_number }}" />
+                                <input class="form-control form-control-sm" id="inputPhone" type="text" name="phone_number" value="{{ auth()->user()->phone_number }}" />
                             </div>
                             <!-- Form Group (birthday)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputBirthday">Birthday</label>
-                                <input class="form-control form-control-sm" id="inputBirthday" type="date" name="date_of_birth" value="{{ $data->date_of_birth }}" />
+                                <input class="form-control form-control-sm" id="inputBirthday" type="date" name="date_of_birth" value="{{ auth()->user()->date_of_birth }}" />
                             </div>
                         </div>
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="job_title">Job Title</label>
-                                <input class="form-control form-control-sm" id="job_title" type="text" name="job_title" value="{{ $data->job_title }}" />
+                                <input class="form-control form-control-sm" id="job_title" type="text" name="job_title" value="{{ auth()->user()->job_title }}" />
                             </div>
                             <!-- Form Group (birthday)-->
                             <div class="col-md-6">

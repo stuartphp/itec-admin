@@ -17,9 +17,7 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        $id = auth()->user()->id;
-        $data = User::findOrFail($id);
-        return view('admin.users.profile', compact('data'));
+        return view('admin.users.profile');
     }
 
     /**
