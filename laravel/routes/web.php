@@ -20,3 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('admin')->middleware(['auth', 'web'])->group(function () {
+    Route::prefix('users')->group(function () {
+        Route::get('profile', [App\Http\Controllers\Admin\Users\ProfileController::class, 'edit']);
+    });
+});
