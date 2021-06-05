@@ -18,7 +18,7 @@
             <!-- Sidenav Toggle Button-->
             <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
             <!-- Navbar Brand-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">iTec Admin</a>
+            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">iTec Admin<sup>LT</sup></a>
             <!-- Navbar Search Input-->
             <!-- * * Note: * * Visible only on and above the lg breakpoint-->
             <form class="form-inline me-auto d-none d-lg-block me-3">
@@ -435,17 +435,19 @@
                                 </nav>
                             </div>
                             <!-- Sidenav Heading (Addons)-->
-                            <div class="sidenav-menu-heading">Plugins</div>
-                            <!-- Sidenav Link (Charts)-->
-                            <a class="nav-link" href="charts.html">
-                                <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
-                                Charts
+                            <div class="sidenav-menu-heading">Management</div>
+                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#accounting" aria-expanded="false" aria-controls="accounting">
+                                <div class="nav-link-icon"><i data-feather="book-open"></i></div>
+                                Accounting
+                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <!-- Sidenav Link (Tables)-->
-                            <a class="nav-link" href="tables.html">
-                                <div class="nav-link-icon"><i data-feather="filter"></i></div>
-                                Tables
-                            </a>
+                            <div class="collapse {{ request()->is('admin/accounting/*') ? 'show' : '' }}" id="accounting" data-bs-parent="#accordionSidenav">
+                                <nav class="sidenav-menu-nested nav">
+                                    <a class="nav-link {{ request()->is('admin/accounting/periods') ? 'active' : '' }}" href="/admin/accounting/periods">Periods</a>
+                                    <a class="nav-link {{ request()->is('admin/accounting/financial-years') ? 'active' : '' }}" href="/admin/accounting/financial-years">Financial Years</a>
+
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </nav>
