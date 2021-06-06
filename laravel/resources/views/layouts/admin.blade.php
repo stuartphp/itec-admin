@@ -20,13 +20,13 @@
             <!-- Navbar Brand-->
             <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">iTec Admin<sup>LT</sup></a>
             <!-- Navbar Search Input-->
-            <!-- * * Note: * * Visible only on and above the lg breakpoint-->
+            <!-- * * Note: * * Visible only on and above the lg breakpoint
             <form class="form-inline me-auto d-none d-lg-block me-3">
                 <div class="input-group input-group-joined input-group-solid">
                     <input class="form-control pe-0" type="search" placeholder="Search" aria-label="Search" />
                     <div class="input-group-text"><i data-feather="search"></i></div>
                 </div>
-            </form>
+            </form>-->
             <!-- Navbar Items-->
             <ul class="navbar-nav align-items-center ms-auto">
                 <!-- Documentation Dropdown-->
@@ -436,14 +436,16 @@
                             </div>
                             <!-- Sidenav Heading (Addons)-->
                             <div class="sidenav-menu-heading">Management</div>
+                            <a class="nav-link {{ request()->is('admin/management/customers') ? 'active' : '' }}" href="/admin/management/customers">Customers</a>
+                            <a class="nav-link {{ request()->is('admin/management/orders') ? 'active' : '' }}" href="/admin/management/orders">Orders</a>
                             <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#accounting" aria-expanded="false" aria-controls="accounting">
                                 <div class="nav-link-icon"><i data-feather="book-open"></i></div>
-                                Accounting
+                                Orders
                                 <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse {{ request()->is('admin/accounting/*') ? 'show' : '' }}" id="accounting" data-bs-parent="#accordionSidenav">
+                            <div class="collapse {{ request()->is('admin/management/*') ? 'show' : '' }}" id="accounting" data-bs-parent="#accordionSidenav">
                                 <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link {{ request()->is('admin/accounting/periods') ? 'active' : '' }}" href="/admin/accounting/periods">Periods</a>
+
                                     <a class="nav-link {{ request()->is('admin/accounting/financial-years') ? 'active' : '' }}" href="/admin/accounting/financial-years">Financial Years</a>
 
                                 </nav>
@@ -474,6 +476,7 @@
             {{ csrf_field() }}
         </form>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
         <script src="/js/scripts.js"></script>
         @livewireScripts
     </body>
