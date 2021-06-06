@@ -24,8 +24,8 @@ Route::prefix('admin')->middleware(['auth', 'web'])->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('profile', [App\Http\Controllers\Admin\Users\ProfileController::class, 'edit']);
     });
-    Route::prefix('accounting')->group(function () {
-        Route::get('financial-years', [\App\Http\Controllers\Admin\Accounting\LivewireController::class, 'financial_years']);
-        Route::get('periods', [\App\Http\Controllers\Admin\Accounting\LivewireController::class, 'periods']);
+    Route::prefix('management')->group(function () {
+        Route::resource('customers', \App\Http\Controllers\Admin\Management\CustomersController::class);
+        Route::resource('orders', \App\Http\Controllers\Admin\Management\OrdersController::class);
     });
 });
