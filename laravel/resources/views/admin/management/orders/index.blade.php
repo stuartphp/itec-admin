@@ -1,28 +1,27 @@
 @extends('layouts.admin')
 @section('title', 'Management - Orders')
 @section('content')
-<!-- <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
-<div class="container-xl px-4">
-    <div class="page-header-content pt-4">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-auto mt-4">
-                <h1 class="page-header-title">
-                    <div class="page-header-icon"><i data-feather="filter"></i></div>
-                    Tables
-                </h1>
-                <div class="page-header-subtitle">An extension of the Simple DataTables library, customized for SB Admin Pro</div>
-            </div>
-        </div>
-    </div>
-</div>
-</header> -->
-<!-- Main page content-->
 <div class="container-fluid px-4 mt-2">
 <div class="card mb-4">
     <div class="card-header">
-    <div class="row">
-    <div class="col-md-6">Orders</div>
-    </div>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card-tite">Orders</div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control form-control-sm"/>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm">
+                            <button class="btn btn-outline-secondary btn-sm" type="button"><i data-feather="search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
     </div>
     <div class="card-body">
         <table class="table table-hover">

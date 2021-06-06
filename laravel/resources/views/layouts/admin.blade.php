@@ -1,483 +1,248 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>iTec Admin @yield('title')</title>
-        <link href="/css/styles.css" rel="stylesheet" />
-        <link rel="icon" type="image/x-icon" href="/assets/img/favicon.png" />
-        <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
-        @livewireStyles
-    </head>
-    <body class="nav-fixed">
-        <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
-            <!-- Sidenav Toggle Button-->
-            <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0" id="sidebarToggle"><i data-feather="menu"></i></button>
-            <!-- Navbar Brand-->
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="index.html">iTec Admin<sup>LT</sup></a>
-            <!-- Navbar Search Input-->
-            <!-- * * Note: * * Visible only on and above the lg breakpoint
-            <form class="form-inline me-auto d-none d-lg-block me-3">
-                <div class="input-group input-group-joined input-group-solid">
-                    <input class="form-control pe-0" type="search" placeholder="Search" aria-label="Search" />
-                    <div class="input-group-text"><i data-feather="search"></i></div>
-                </div>
-            </form>-->
-            <!-- Navbar Items-->
-            <ul class="navbar-nav align-items-center ms-auto">
-                <!-- Documentation Dropdown-->
-                <li class="nav-item dropdown no-caret d-none d-md-block me-3">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownDocs" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="fw-500">Documentation</div>
-                        <i class="fas fa-chevron-right dropdown-arrow"></i>
+
+<!doctype html>
+<html lang="{{ (Auth::user()->language)??'en' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Attela - @yield('title')</title>
+     <link rel="stylesheet" href="{{ asset('vendors/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ asset('vendors/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet"/>
+    <link href="{{asset('vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/custom.css')}}?<?php echo md5(time())?>" rel="stylesheet" />
+    @livewireStyles
+    @yield('css')
+
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid">
+          <a class="navbar-brand text-success" href="/home">Attela <sup><i>erp</i></sup></a>
+        @if(session()->get('company_id'))
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-menu-up"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              {{ session()->get('trading_name') }} | {{ session()->get('financial_year') }} | {{ __('global.period').':'.session()->get('financial_period') }}
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a href="{{ url('dashboard') }}" class="nav-link {{request()->is('dashboard') ? 'active' : ''}}" data-toggle="tooltip" title="{{ __('global.dashboard') }}">
+                        <i class="bi bi-speedometer2 fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.dashboard') }}</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-end py-0 me-sm-n15 me-lg-0 o-hidden animated--fade-in-up" aria-labelledby="navbarDropdownDocs">
-                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro" target="_blank">
-                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="book"></i></div>
-                            <div>
-                                <div class="small text-gray-500">Documentation</div>
-                                Usage instructions and reference
-                            </div>
-                        </a>
-                        <div class="dropdown-divider m-0"></div>
-                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/components" target="_blank">
-                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="code"></i></div>
-                            <div>
-                                <div class="small text-gray-500">Components</div>
-                                Code snippets and reference
-                            </div>
-                        </a>
-                        <div class="dropdown-divider m-0"></div>
-                        <a class="dropdown-item py-3" href="https://docs.startbootstrap.com/sb-admin-pro/changelog" target="_blank">
-                            <div class="icon-stack bg-primary-soft text-primary me-4"><i data-feather="file-text"></i></div>
-                            <div>
-                                <div class="small text-gray-500">Changelog</div>
-                                Updates and changes
-                            </div>
-                        </a>
-                    </div>
                 </li>
-                <!-- Navbar Search Dropdown-->
-                <!-- * * Note: * * Visible only below the lg breakpoint-->
-                <li class="nav-item dropdown no-caret me-3 d-lg-none">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="searchDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="search"></i></a>
-                    <!-- Dropdown - Search-->
-                    <div class="dropdown-menu dropdown-menu-end p-3 shadow animated--fade-in-up" aria-labelledby="searchDropdown">
-                        <form class="form-inline me-auto w-100">
-                            <div class="input-group input-group-joined input-group-solid">
-                                <input class="form-control pe-0" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                                <div class="input-group-text"><i data-feather="search"></i></div>
-                            </div>
-                        </form>
-                    </div>
+                <li class="nav-item  {{request()->is('sales') ? 'open' : ''}}">
+                    <a class="nav-link " href="{{url('sales')}}" data-toggle="tooltip" title="{{ __('global.menu.sales.title') }}">
+                        <i class="bi bi-graph-up fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.sales.title') }}</span>
+                    </a>
                 </li>
-                <!-- Alerts Dropdown-->
-                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownAlerts" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="bell"></i></a>
-                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
-                        <h6 class="dropdown-header dropdown-notifications-header">
-                            <i class="me-2" data-feather="bell"></i>
-                            Alerts Center
-                        </h6>
-                        <!-- Example Alert 1-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-warning"><i data-feather="activity"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 29, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">This is an alert message. It's nothing serious, but it requires your attention.</div>
-                            </div>
-                        </a>
-                        <!-- Example Alert 2-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-info"><i data-feather="bar-chart"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 22, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">A new monthly report is ready. Click here to view!</div>
-                            </div>
-                        </a>
-                        <!-- Example Alert 3-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-danger"><i class="fas fa-exclamation-triangle"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 8, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">Critical system failure, systems shutting down.</div>
-                            </div>
-                        </a>
-                        <!-- Example Alert 4-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <div class="dropdown-notifications-item-icon bg-success"><i data-feather="user-plus"></i></div>
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-details">December 2, 2021</div>
-                                <div class="dropdown-notifications-item-content-text">New user request. Woody has requested access to the organization.</div>
-                            </div>
-                        </a>
-                        <a class="dropdown-item dropdown-notifications-footer" href="#!">View All Alerts</a>
-                    </div>
+                <li class="nav-item  {{request()->is('purchases') ? 'open' : ''}}">
+                    <a class="nav-link " href="{{url('purchases')}}" data-toggle="tooltip" title="{{ __('global.menu.purchases.title') }}">
+                        <i class="bi bi-cart3 fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.purchases.title') }}</span>
+                    </a>
                 </li>
-                <!-- Messages Dropdown-->
-                <li class="nav-item dropdown no-caret d-none d-sm-block me-3 dropdown-notifications">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail"></i></a>
-                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownMessages">
-                        <h6 class="dropdown-header dropdown-notifications-header">
-                            <i class="me-2" data-feather="mail"></i>
-                            Message Center
-                        </h6>
-                        <!-- Example Message 1  -->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src="/assets/img/illustrations/profiles/profile-2.png" />
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                                <div class="dropdown-notifications-item-content-details">Thomas Wilcox · 58m</div>
-                            </div>
-                        </a>
-                        <!-- Example Message 2-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src="/assets/img/illustrations/profiles/profile-3.png" />
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                                <div class="dropdown-notifications-item-content-details">Emily Fowler · 2d</div>
-                            </div>
-                        </a>
-                        <!-- Example Message 3-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src="/assets/img/illustrations/profiles/profile-4.png" />
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                                <div class="dropdown-notifications-item-content-details">Marshall Rosencrantz · 3d</div>
-                            </div>
-                        </a>
-                        <!-- Example Message 4-->
-                        <a class="dropdown-item dropdown-notifications-item" href="#!">
-                            <img class="dropdown-notifications-item-img" src="/assets/img/illustrations/profiles/profile-5.png" />
-                            <div class="dropdown-notifications-item-content">
-                                <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                                <div class="dropdown-notifications-item-content-details">Colby Newton · 3d</div>
-                            </div>
-                        </a>
-                        <!-- Footer Link-->
-                        <a class="dropdown-item dropdown-notifications-footer" href="#!">Read All Messages</a>
-                    </div>
+                @if(count(array_intersect(session()->get('grant'), ['SU','inventory_access']))==1)
+                <li class="nav-item ">
+                    <a class="nav-link {{request()->is('inventory/*') ? 'active' : ''}}" href="{{ route('items.index') }}"  data-toggle="tooltip" title="{{ __('global.menu.inventory.title') }}">
+                      <span><i class="bi bi-box fa-menu d-none d-sm-block"></i></span> <span class="d-block d-sm-none">{{ __('global.menu.inventory.title') }}</span>
+                    </a>
                 </li>
-                <!-- User Dropdown-->
-                <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
-                    <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-fluid" src="/assets/img/illustrations/profiles/{{ (auth()->user()->image > '') ? auth()->user()->image : 'no-profile.jpg' }}" /></a>
-                    <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
-                        <h6 class="dropdown-header d-flex align-items-center">
-                            <img class="dropdown-user-img" src="/assets/img/illustrations/profiles/{{ (auth()->user()->image > '') ? auth()->user()->image : 'no-profile.jpg' }}" />
-                            <div class="dropdown-user-details">
-                                <div class="dropdown-user-details-name">{{ auth()->user()->firstname }} {{ auth()->user()->lastname }}</div>
-                                <div class="dropdown-user-details-email">{{ auth()->user()->email }}</div>
-                            </div>
-                        </h6>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/admin/users/profile">
-                            <div class="dropdown-item-icon"><i data-feather="settings"></i></div>
-                            Account
-                        </a>
-                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
-                            <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
-                            Logout
-                        </a>
-                    </div>
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link dropdown {{request()->is('calendars/*') ? 'active' : ''}}" href="/calendars/data" data-toggle="tooltip" title="{{ __('global.menu.calendars.title') }}">
+                        <i class="bi bi-calendar fa-menu d-none d-sm-block"></i>  <span class="d-block d-sm-none">{{ __('global.menu.calendars.title') }}</span>
+                    </a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link {{request()->is('customers/*') ? 'active' : ''}}" href="{{ route('customers.index') }}" id="navCustomer" data-toggle="tooltip" title="{{ __('global.menu.customers.title') }}">
+                        <i class="bi bi-person fa-menu d-none d-sm-block"></i>  <span class="d-block d-sm-none">{{ __('global.menu.customers.title') }}</span>
+                    </a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link {{request()->is('suppliers/*') ? 'active' : ''}}" href="{{ route('suppliers.index') }}" id="navSupplier" role="button" data-toggle="tooltip" title="{{ __('global.menu.suppliers.title') }}"><i class="bi bi-truck fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.suppliers.title') }}</span>
+                    </a>
+                  </li>
+                @if(count(array_intersect(session()->get('grant'), ['SU','documents_access']))==1)
+                <li class="nav-item">
+                    <a class="nav-link {{(request()->is('documents/*')) || (request()->is('documents')) ? 'active' : ''}}" href="/documents/documents" data-toggle="tooltip" title="{{ __('global.menu.documents.title') }}">
+                        <i class="bi bi-file-earmark fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.documents.title') }}</span>
+                    </a>
+                  </li>
+                  @endif
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown {{request()->is('accounting/*') ? 'active' : ''}}" href="#" id="navAccounting" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.accounting.title') }}">
+                        <i class="bi bi-book fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.accounting.title') }}</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navAccounting">
+                        @if(count(array_intersect(session()->get('grant'), ['SU','asset_groups_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/asset-groups') ? 'active' : ''}}" href="{{ route('asset-groups.index') }}">{{ __('asset_groups.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','asset_types_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/asset-types') ? 'active' : ''}}" href="{{ route('asset-types.index') }}">{{ __('asset_types.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','assets_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/assets') ? 'active' : ''}}" href="{{ route('assets.index') }}">{{ __('assets.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','counters_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/counters') ? 'active' : ''}}" href="{{ route('counters.index') }}">{{ __('counters.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','journal_entries_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/journal-entries') ? 'active' : ''}}" href="{{ route('journal-entries.index') }}">{{ __('journal_entries.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','journals_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/journals') ? 'active' : ''}}" href="{{ route('journals.index') }}">{{ __('journals.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','ledgers_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/ledgers') ? 'active' : ''}}" href="{{ route('ledgers.index') }}">{{ __('ledgers.title') }}</a></li>
+                        @endif
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item {{request()->is('accounting/roll-over') ? 'active' : ''}}" href="{{ route('roll-over') }}">Roll Over</a></li>
+
+                    </ul>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link {{request()->is('human-resource/*') ? 'active' : ''}}" href="{{ route('employees.index') }}" id="navHr" data-toggle="tooltip" title="{{ __('global.menu.employees.title') }}">
+                        <i class="bi bi-suit-heart fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.hr.title') }}</span>
+                    </a>
+                  </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown {{request()->is('payroll/*') ? 'active' : ''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.payroll.title') }}">
+                      <i class="bi bi-wallet2 fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.payroll.title') }}</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @if(count(array_intersect(session()->get('grant'), ['SU','payroll_templates_access']))==1)
+                        <li><a class="dropdown-item {{request()->is('payroll/payroll-templates') ? 'active' : ''}}" href="{{  route('payroll-template.index') }}">{{ __('payroll_templates.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','payroll_transaction_codes_access']))==1)
+                        <li><a class="dropdown-item {{request()->is('payroll/payroll-transaction-codes') ? 'active' : ''}}" href="{{  route('payroll-transaction-codes.index') }}">{{ __('payroll_transaction_codes.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','payroll_transactions_access']))==1)
+                        <li><a class="dropdown-item {{request()->is('payroll/payroll-transactions') ? 'active' : ''}}" href="{{  route('payroll-transactions.index') }}">{{ __('payroll_transactions.title') }}</a></li>
+                        @endif
+                      <li><hr class="dropdown-divider"></li>
+                        @if(count(array_intersect(session()->get('grant'), ['SU','payroll_run_access']))==1)
+                        <li><a class="dropdown-item {{request()->is('payroll/run') ? 'active' : ''}}" href="#">{{ __('payroll.run') }}</a></li>
+                        @endif
+                    </ul>
+                  </li>
+                  @if(count(array_intersect(session()->get('grant'), ['SU','setup_access']))==1)
+                  <li class="nav-item">
+                    <a href="/setup" class="nav-link {{request()->is('setup') ? 'active' : ''}}" data-toggle="tooltip" title="{{ __('global.menu.setup.title') }}">
+                        <i class="bi bi-gear fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.setup.title') }}</span>
+                    </a>
+                </li>@endif
+                <li class="nav-item">
+                    <a href="/test" class="nav-link {{request()->is('test') ? 'active' : ''}}" data-toggle="tooltip" title="test">
+                        <i class="bi bi-app fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">test</span>
+                    </a>
                 </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown {{request()->is('user-management/*') ? 'active' : ''}}" href="#" id="userMaement" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.users.title') }}">
+                        <i class="bi bi-people fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.users.title') }}</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="userMaement">
+                        @if(count(array_intersect(session()->get('grant'), ['SU','users_access']))==1)
+                      <li><a class="dropdown-item {{request()->is('user-management/users') ? 'active' : ''}}" href="{{ route('users.index') }}">{{ __('users.title') }}</a></li>
+                      @endif
+                      @if(count(array_intersect(session()->get('grant'), ['SU','roles_access']))==1)
+                      <li><a class="dropdown-item {{request()->is('user-management/roles') ? 'active' : ''}}" href="{{  route('roles.index') }}">{{ __('roles.title') }}</a></li>
+                      @endif
+                      @if(\Auth::user()->email=='stuart@itecassist.co.za')
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item {{request()->is('user-management/permissions') ? 'active' : ''}}" href="{{ route('permissions.index') }}">{{ __('permissions.title') }}</a></li>
+                      @endif
+                    </ul>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="tooltip" title="">
+                        &nbsp;
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown {{request()->is('help/*') ? 'active' : ''}}" href="#" id="navHelp" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-question fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.help') }}</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navHelp">
+                      <li><a class="dropdown-item {{request()->is('help/inventory') ? 'active' : ''}}" href="{{ route('help_inventory') }}">{{ __('global.menu.inventory.title') }}</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </li>
             </ul>
-        </nav>
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sidenav shadow-right sidenav-light">
-                    <div class="sidenav-menu">
-                        <div class="nav accordion" id="accordionSidenav">
-                            <!-- Sidenav Menu Heading (Account)-->
-                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
-                            <div class="sidenav-menu-heading d-sm-none">Account</div>
-                            <!-- Sidenav Link (Alerts)-->
-                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
-                            <a class="nav-link d-sm-none" href="#!">
-                                <div class="nav-link-icon"><i data-feather="bell"></i></div>
-                                Alerts
-                                <span class="badge bg-warning-soft text-warning ms-auto">4 New!</span>
-                            </a>
-                            <!-- Sidenav Link (Messages)-->
-                            <!-- * * Note: * * Visible only on and above the sm breakpoint-->
-                            <a class="nav-link d-sm-none" href="#!">
-                                <div class="nav-link-icon"><i data-feather="mail"></i></div>
-                                Messages
-                                <span class="badge bg-success-soft text-success ms-auto">2 New!</span>
-                            </a>
-                            <!-- Sidenav Menu Heading (Core)-->
-                            <div class="sidenav-menu-heading">Core</div>
-                            <!-- Sidenav Accordion (Dashboard)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">
-                                <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                                Dashboards
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseDashboards" data-bs-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
-                                    <a class="nav-link" href="dashboard-1.html">
-                                        Default
-                                        <span class="badge bg-primary-soft text-primary ms-auto">Updated</span>
-                                    </a>
-                                    <a class="nav-link" href="dashboard-2.html">Multipurpose</a>
-                                    <a class="nav-link" href="dashboard-3.html">Affiliate</a>
-                                </nav>
-                            </div>
-                            <!-- Sidenav Heading (App Views)-->
-                            <div class="sidenav-menu-heading">App Views</div>
-                            <!-- Sidenav Accordion (Pages)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="nav-link-icon"><i data-feather="grid"></i></div>
-                                Pages
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" data-bs-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesMenu">
-                                    <!-- Nested Sidenav Accordion (Pages -> Account)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAccount" aria-expanded="false" aria-controls="pagesCollapseAccount">
-                                        Account
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAccount" data-bs-parent="#accordionSidenavPagesMenu">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="account-profile.html">Profile</a>
-                                            <a class="nav-link" href="account-billing.html">Billing</a>
-                                            <a class="nav-link" href="account-security.html">Security</a>
-                                            <a class="nav-link" href="account-notifications.html">Notifications</a>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Pages -> Authentication)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" data-bs-parent="#accordionSidenavPagesMenu">
-                                        <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPagesAuth">
-                                            <!-- Nested Sidenav Accordion (Pages -> Authentication -> Basic)-->
-                                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthBasic" aria-expanded="false" aria-controls="pagesCollapseAuthBasic">
-                                                Basic
-                                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                            </a>
-                                            <div class="collapse" id="pagesCollapseAuthBasic" data-bs-parent="#accordionSidenavPagesAuth">
-                                                <nav class="sidenav-menu-nested nav">
-                                                    <a class="nav-link" href="auth-login-basic.html">Login</a>
-                                                    <a class="nav-link" href="auth-register-basic.html">Register</a>
-                                                    <a class="nav-link" href="auth-password-basic.html">Forgot Password</a>
-                                                </nav>
-                                            </div>
-                                            <!-- Nested Sidenav Accordion (Pages -> Authentication -> Social)-->
-                                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuthSocial" aria-expanded="false" aria-controls="pagesCollapseAuthSocial">
-                                                Social
-                                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                            </a>
-                                            <div class="collapse" id="pagesCollapseAuthSocial" data-bs-parent="#accordionSidenavPagesAuth">
-                                                <nav class="sidenav-menu-nested nav">
-                                                    <a class="nav-link" href="auth-login-social.html">Login</a>
-                                                    <a class="nav-link" href="auth-register-social.html">Register</a>
-                                                    <a class="nav-link" href="auth-password-social.html">Forgot Password</a>
-                                                </nav>
-                                            </div>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Pages -> Error)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" data-bs-parent="#accordionSidenavPagesMenu">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="error-400.html">400 Error</a>
-                                            <a class="nav-link" href="error-401.html">401 Error</a>
-                                            <a class="nav-link" href="error-403.html">403 Error</a>
-                                            <a class="nav-link" href="error-404-1.html">404 Error 1</a>
-                                            <a class="nav-link" href="error-404-2.html">404 Error 2</a>
-                                            <a class="nav-link" href="error-500.html">500 Error</a>
-                                            <a class="nav-link" href="error-503.html">503 Error</a>
-                                            <a class="nav-link" href="error-504.html">504 Error</a>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Pages -> Knowledge Base)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#pagesCollapseKnowledgeBase" aria-expanded="false" aria-controls="pagesCollapseKnowledgeBase">
-                                        Knowledge Base
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseKnowledgeBase" data-bs-parent="#accordionSidenavPagesMenu">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="knowledge-base-home-1.html">Home 1</a>
-                                            <a class="nav-link" href="knowledge-base-home-2.html">Home 2</a>
-                                            <a class="nav-link" href="knowledge-base-category.html">Category</a>
-                                            <a class="nav-link" href="knowledge-base-article.html">Article</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link" href="pricing.html">Pricing</a>
-                                    <a class="nav-link" href="invoice.html">Invoice</a>
-                                </nav>
-                            </div>
-                            <!-- Sidenav Accordion (Flows)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseFlows" aria-expanded="false" aria-controls="collapseFlows">
-                                <div class="nav-link-icon"><i data-feather="repeat"></i></div>
-                                Flows
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseFlows" data-bs-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href="multi-tenant-select.html">Multi-Tenant Registration</a>
-                                    <a class="nav-link" href="wizard.html">Wizard</a>
-                                </nav>
-                            </div>
-                            <!-- Sidenav Heading (UI Toolkit)-->
-                            <div class="sidenav-menu-heading">UI Toolkit</div>
-                            <!-- Sidenav Accordion (Layout)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="nav-link-icon"><i data-feather="layout"></i></div>
-                                Layout
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseLayouts" data-bs-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
-                                    <!-- Nested Sidenav Accordion (Layout -> Navigation)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseLayoutSidenavVariations" aria-expanded="false" aria-controls="collapseLayoutSidenavVariations">
-                                        Navigation
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLayoutSidenavVariations" data-bs-parent="#accordionSidenavLayout">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="layout-static.html">Static Sidenav</a>
-                                            <a class="nav-link" href="layout-dark.html">Dark Sidenav</a>
-                                            <a class="nav-link" href="layout-rtl.html">RTL Layout</a>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Layout -> Container Options)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseLayoutContainers" aria-expanded="false" aria-controls="collapseLayoutContainers">
-                                        Container Options
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLayoutContainers" data-bs-parent="#accordionSidenavLayout">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="layout-boxed.html">Boxed Layout</a>
-                                            <a class="nav-link" href="layout-fluid.html">Fluid Layout</a>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Layout -> Page Headers)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsPageHeaders" aria-expanded="false" aria-controls="collapseLayoutsPageHeaders">
-                                        Page Headers
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLayoutsPageHeaders" data-bs-parent="#accordionSidenavLayout">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="header-simplified.html">Simplified</a>
-                                            <a class="nav-link" href="header-compact.html">Compact</a>
-                                            <a class="nav-link" href="header-overlap.html">Content Overlap</a>
-                                            <a class="nav-link" href="header-breadcrumbs.html">Breadcrumbs</a>
-                                            <a class="nav-link" href="header-light.html">Light</a>
-                                        </nav>
-                                    </div>
-                                    <!-- Nested Sidenav Accordion (Layout -> Starter Layouts)-->
-                                    <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsStarterTemplates" aria-expanded="false" aria-controls="collapseLayoutsStarterTemplates">
-                                        Starter Layouts
-                                        <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="collapseLayoutsStarterTemplates" data-bs-parent="#accordionSidenavLayout">
-                                        <nav class="sidenav-menu-nested nav">
-                                            <a class="nav-link" href="starter-default.html">Default</a>
-                                            <a class="nav-link" href="starter-minimal.html">Minimal</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
-                            <!-- Sidenav Accordion (Components)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseComponents" aria-expanded="false" aria-controls="collapseComponents">
-                                <div class="nav-link-icon"><i data-feather="package"></i></div>
-                                Components
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseComponents" data-bs-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href="alerts.html">Alerts</a>
-                                    <a class="nav-link" href="avatars.html">Avatars</a>
-                                    <a class="nav-link" href="badges.html">Badges</a>
-                                    <a class="nav-link" href="buttons.html">Buttons</a>
-                                    <a class="nav-link" href="cards.html">
-                                        Cards
-                                        <span class="badge bg-primary-soft text-primary ms-auto">Updated</span>
-                                    </a>
-                                    <a class="nav-link" href="dropdowns.html">Dropdowns</a>
-                                    <a class="nav-link" href="forms.html">
-                                        Forms
-                                        <span class="badge bg-primary-soft text-primary ms-auto">Updated</span>
-                                    </a>
-                                    <a class="nav-link" href="modals.html">Modals</a>
-                                    <a class="nav-link" href="navigation.html">Navigation</a>
-                                    <a class="nav-link" href="progress.html">Progress</a>
-                                    <a class="nav-link" href="step.html">Step</a>
-                                    <a class="nav-link" href="timeline.html">Timeline</a>
-                                    <a class="nav-link" href="toasts.html">Toasts</a>
-                                    <a class="nav-link" href="tooltips.html">Tooltips</a>
-                                </nav>
-                            </div>
-                            <!-- Sidenav Accordion (Utilities)-->
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseUtilities" aria-expanded="false" aria-controls="collapseUtilities">
-                                <div class="nav-link-icon"><i data-feather="tool"></i></div>
-                                Utilities
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapseUtilities" data-bs-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav">
-                                    <a class="nav-link" href="animations.html">Animations</a>
-                                    <a class="nav-link" href="background.html">Background</a>
-                                    <a class="nav-link" href="borders.html">Borders</a>
-                                    <a class="nav-link" href="lift.html">Lift</a>
-                                    <a class="nav-link" href="shadows.html">Shadows</a>
-                                    <a class="nav-link" href="typography.html">Typography</a>
-                                </nav>
-                            </div>
-                            <!-- Sidenav Heading (Addons)-->
-                            <div class="sidenav-menu-heading">Management</div>
-                            <a class="nav-link {{ request()->is('admin/management/customers') ? 'active' : '' }}" href="/admin/management/customers">Customers</a>
-                            <a class="nav-link {{ request()->is('admin/management/orders') ? 'active' : '' }}" href="/admin/management/orders">Orders</a>
-                            <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#accounting" aria-expanded="false" aria-controls="accounting">
-                                <div class="nav-link-icon"><i data-feather="book-open"></i></div>
-                                Orders
-                                <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse {{ request()->is('admin/management/*') ? 'show' : '' }}" id="accounting" data-bs-parent="#accordionSidenav">
-                                <nav class="sidenav-menu-nested nav">
-
-                                    <a class="nav-link {{ request()->is('admin/accounting/financial-years') ? 'active' : '' }}" href="/admin/accounting/financial-years">Financial Years</a>
-
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div id="layoutSidenav_content">
-                <main>
-                    @yield('content')
-                </main>
-                <footer class="footer-admin mt-auto footer-light">
-                    <div class="container-xl px-4">
-                        <div class="row">
-                            <div class="col-md-6 small">Copyright &copy; Your Website 2021</div>
-                            <div class="col-md-6 text-md-end small">
-                                <a href="#!">Privacy Policy</a>
-                                &middot;
-                                <a href="#!">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
-            </div>
+            <span class="navbar-text">
+                <div class="btn-group  dropstart">
+                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">{{ __('global.logout') }}</a></li>
+                    </ul>
+                  </div>
+            </span>
+          </div>
+          @endif
         </div>
-        <form id="logoutform" action="{{ url('logout') }}" method="POST" style="display: none;">
-            {{ csrf_field() }}
-        </form>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+      </nav>
 
-        <script src="/js/scripts.js"></script>
-        @livewireScripts
-    </body>
+<div class="app-body">
+    <div class="container-fluid">
+        @yield('content')
+    </div>
+</div>
+
+<form id="logoutform" action="{{ url('logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+</form>
+    <div id="loadImg" style="display: none"><img src="/images/ajax-loader.gif" width="100px"/></div>
+ <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendors/jquery/dist/popper.min.js') }}"></script>
+    <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{asset('vendors/select2/dist/js/select2.full.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    <script src="{{asset('js/moment.min.js')}}"></script>
+    <script src="{{asset('vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="{{ asset('js/accounting.min.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    @livewireScripts
+<script>
+
+$('.nav-item').on('click', function () {
+    $('#loadImg').toggle();
+});
+let add='{{ __('global.add_new_record') }}';
+let update='{{ __('global.update') }}';
+let sideMenu=350;
+    @if(session()->get('success'))
+//https://sweetalert.js.org/guides/
+Swal.fire({
+    position: 'top-end',
+    toast: true,
+    title:'{!! session()->get("success") !!}',
+    text:"",
+    icon: 'success',
+    showConfirmButton: false,
+    timer: 1500
+});
+@endif
+@if(session()->get('error'))
+Swal.fire({
+    position: 'top-end',
+    toast: true,
+    title:'{!! session()->get("error") !!}',
+    text:"",
+    icon: "error",
+    showConfirmButton: false,
+    timer: 1500
+});
+@endif
+</script>
+@yield('scripts')
+
+</body>
 </html>
