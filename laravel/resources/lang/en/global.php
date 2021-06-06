@@ -1,4 +1,5 @@
 <?php
+
 return [
     'action'                              => 'Action',
     'actions'                              => 'Actions',
@@ -217,20 +218,5 @@ return [
         'sales_order'           =>'Sales Order',
         'supplier_invoice'      =>'Supplier Invoice',
         'tax_invoice'           =>'Tax Invoice',
-    ],
-    'title'=>[
-        'Dr.'=>'Doctor',
-        'Esp.'=>'Esquire',
-        'Hon.'=>'Honorable',
-        'Jr.'=>'Junior',
-        'Mr'=>'Mister',
-        'Mrs.'=>'Mistress',
-        'Ms.'=>'Mis',
-        'Msgr.'=>'Monsignor',
-        'Prof.'=>'Professor',
-        'Rev.'=>'Reverend',
-        'Rt.Hon.'=>'Right Honorable',
-        'Sr.'=>'Senior',
-        'St.'=>'Saint'
     ],
 ];
