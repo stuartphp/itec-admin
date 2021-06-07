@@ -27,6 +27,9 @@ Route::prefix('admin')->middleware(['auth', 'web'])->group(function () {
     Route::prefix('settings')->group(function () {
         Route::resource('users', \App\Http\Controllers\Admin\Settings\UsersContoller::class);
     });
+    Route::prefix('products')->group(function(){
+        Route::resource('/', \App\Http\Controllers\Admin\Products\ProductsController::class);
+    });
     Route::prefix('users')->group(function () {
         Route::get('profile', [App\Http\Controllers\Admin\Users\ProfileController::class, 'edit']);
     });

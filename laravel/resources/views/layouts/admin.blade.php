@@ -74,9 +74,9 @@
                     </ul>
                 </li>
                 @endif
-                @if(count(array_intersect(session()->get('grant'), ['SU','inventory_access']))==1)
+                @if(count(array_intersect(session()->get('grant'), ['SU','products']))==1)
                 <li class="nav-item ">
-                    <a class="nav-link {{request()->is('inventory/*') ? 'active' : ''}}" href="/"  data-toggle="tooltip" title="{{ __('global.menu.inventory.title') }}">
+                    <a class="nav-link {{request()->is('admin/products*') ? 'active' : ''}}" href="/admin/products"  data-toggle="tooltip" title="{{ __('global.menu.inventory.title') }}">
                       <span><i class="bi bi-box fa-menu d-none d-sm-block"></i></span> <span class="d-block d-sm-none">{{ __('global.menu.inventory.title') }}</span>
                     </a>
                 </li>
@@ -133,11 +133,12 @@
 
                     </ul>
                   </li>
+                @if(count(array_intersect(session()->get('site_access'), ['employees']))==1)
                 <li class="nav-item">
                     <a class="nav-link {{request()->is('human-resource/*') ? 'active' : ''}}" href="/" id="navHr" data-toggle="tooltip" title="{{ __('global.menu.employees.title') }}">
                         <i class="bi bi-suit-heart fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.hr.title') }}</span>
                     </a>
-                  </li>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown {{request()->is('payroll/*') ? 'active' : ''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.payroll.title') }}">
                       <i class="bi bi-wallet2 fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.payroll.title') }}</span>
@@ -157,8 +158,8 @@
                         <li><a class="dropdown-item {{request()->is('payroll/run') ? 'active' : ''}}" href="#">{{ __('payroll.run') }}</a></li>
                         @endif
                     </ul>
-                  </li>
-
+                </li>
+                @endif
                 @if(count(array_intersect(session()->get('grant'), ['SU','setup_access']))==1)
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown {{request()->is('admin/settings/*') ? 'active' : ''}}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.setup.title') }}">
@@ -192,28 +193,24 @@
                     </ul>
                 </li>
                 @endif
-                <li class="nav-item">
-                    <a href="/test" class="nav-link {{request()->is('test') ? 'active' : ''}}" data-toggle="tooltip" title="test">
-                        <i class="bi bi-app fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">test</span>
-                    </a>
-                </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown {{request()->is('user-management/*') ? 'active' : ''}}" href="#" id="userMaement" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.users.title') }}">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown {{request()->is('user-management/*') ? 'active' : ''}}" href="#" id="userManagement" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.users.title') }}">
                         <i class="bi bi-people fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.users.title') }}</span>
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="userMaement">
+                    <ul class="dropdown-menu" aria-labelledby="userManagement">
                         @if(count(array_intersect(session()->get('grant'), ['SU','users_access']))==1)
-                      <li><a class="dropdown-item {{request()->is('user-management/users') ? 'active' : ''}}" href="/">{{ __('users.title') }}</a></li>
-                      @endif
-                      @if(count(array_intersect(session()->get('grant'), ['SU','roles_access']))==1)
-                      <li><a class="dropdown-item {{request()->is('user-management/roles') ? 'active' : ''}}" href="/">{{ __('roles.title') }}</a></li>
-                      @endif
-                      @if(\Auth::user()->email=='stuart@itecassist.co.za')
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item {{request()->is('user-management/permissions') ? 'active' : ''}}" href="/">{{ __('permissions.title') }}</a></li>
-                      @endif
+                        <li><a class="dropdown-item {{request()->is('user-management/users') ? 'active' : ''}}" href="/">{{ __('users.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','roles_access']))==1)
+                        <li><a class="dropdown-item {{request()->is('user-management/roles') ? 'active' : ''}}" href="/">{{ __('roles.title') }}</a></li>
+                        @endif
+                        @if(\Auth::user()->email=='stuart@itecassist.co.za')
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item {{request()->is('user-management/permissions') ? 'active' : ''}}" href="/">{{ __('permissions.title') }}</a></li>
+                        @endif
                     </ul>
-                  </li>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="tooltip" title="">
                         &nbsp;
