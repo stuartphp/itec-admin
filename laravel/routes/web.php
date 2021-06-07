@@ -24,6 +24,9 @@ Route::get('selection/{id}', [App\Http\Controllers\HomeController::class, 'selec
 
 Route::prefix('admin')->middleware(['auth', 'web'])->group(function () {
     Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index']);
+    Route::prefix('settings')->group(function () {
+        Route::resource('users', \App\Http\Controllers\Admin\Settings\UsersContoller::class);
+    });
     Route::prefix('users')->group(function () {
         Route::get('profile', [App\Http\Controllers\Admin\Users\ProfileController::class, 'edit']);
     });

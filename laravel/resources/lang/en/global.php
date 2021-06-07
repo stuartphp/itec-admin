@@ -178,7 +178,10 @@ return [
         'title'=>'Settings'
     ],
     'setup'=>[
-        'title'=>'Setup'
+        'title'=>'Settings',
+        'sub' => [
+            'users' => 'Users'
+        ]
     ],
     'customers'=>[
         'title'=>'Customers'
@@ -200,6 +203,9 @@ return [
     ],
     'suppliers'=>[
         'title'=>'Suppliers'
+    ],
+    'website'=>[
+        'title'=>'Website'
     ]
     ],
 

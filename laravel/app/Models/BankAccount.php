@@ -10,11 +10,11 @@ class BankAccount extends Model
     use HasFactory;
     protected $tabel='bank_accounts';
     protected $fillable = [
+        'company_id',
         'ledger_code',
         'bank',
         'branch',
         'account_name',
         'account_number',
-
     ];
 }

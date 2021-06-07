@@ -41,6 +41,39 @@
                         <i class="bi bi-cart3 fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.purchases.title') }}</span>
                     </a>
                 </li>
+                @if(count(array_intersect(session()->get('grant'), ['SU','website_access']))==1)
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown {{request()->is('website/*') ? 'active' : ''}}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.website.title') }}">
+                      <span><i class="bi bi-display fa-menu d-none d-sm-block"></i></span> <span class="d-block d-sm-none">{{ __('global.menu.website.title') }}</span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navAccounting">
+                        @if(count(array_intersect(session()->get('grant'), ['SU','asset_groups_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/asset-groups') ? 'active' : ''}}" href="/">{{ __('asset_groups.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','asset_types_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/asset-types') ? 'active' : ''}}" href="/">{{ __('asset_types.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','assets_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/assets') ? 'active' : ''}}" href="/">{{ __('assets.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','counters_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/counters') ? 'active' : ''}}" href="/">{{ __('counters.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','journal_entries_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/journal-entries') ? 'active' : ''}}" href="/">{{ __('journal_entries.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','journals_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/journals') ? 'active' : ''}}" href="/">{{ __('journals.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','ledgers_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/ledgers') ? 'active' : ''}}" href="/">{{ __('ledgers.title') }}</a></li>
+                        @endif
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item {{request()->is('accounting/roll-over') ? 'active' : ''}}" href="/">Roll Over</a></li>
+
+                    </ul>
+                </li>
+                @endif
                 @if(count(array_intersect(session()->get('grant'), ['SU','inventory_access']))==1)
                 <li class="nav-item ">
                     <a class="nav-link {{request()->is('inventory/*') ? 'active' : ''}}" href="/"  data-toggle="tooltip" title="{{ __('global.menu.inventory.title') }}">
@@ -125,12 +158,40 @@
                         @endif
                     </ul>
                   </li>
-                  @if(count(array_intersect(session()->get('grant'), ['SU','setup_access']))==1)
-                  <li class="nav-item">
-                    <a href="/setup" class="nav-link {{request()->is('setup') ? 'active' : ''}}" data-toggle="tooltip" title="{{ __('global.menu.setup.title') }}">
-                        <i class="bi bi-gear fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.setup.title') }}</span>
+
+                @if(count(array_intersect(session()->get('grant'), ['SU','setup_access']))==1)
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown {{request()->is('admin/settings/*') ? 'active' : ''}}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.setup.title') }}">
+                      <span><i class="bi bi-gear fa-menu d-none d-sm-block"></i></span> <span class="d-block d-sm-none">{{ __('global.menu.setup.title') }}</span>
                     </a>
-                </li>@endif
+                    <ul class="dropdown-menu" aria-labelledby="navAccounting">
+                        @if(count(array_intersect(session()->get('grant'), ['SU','asset_groups_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/asset-groups') ? 'active' : ''}}" href="/">{{ __('asset_groups.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','asset_types_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/asset-types') ? 'active' : ''}}" href="/">{{ __('asset_types.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','assets_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/assets') ? 'active' : ''}}" href="/">{{ __('assets.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','counters_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/counters') ? 'active' : ''}}" href="/">{{ __('counters.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','journal_entries_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/journal-entries') ? 'active' : ''}}" href="/">{{ __('journal_entries.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','journals_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/journals') ? 'active' : ''}}" href="/">{{ __('journals.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','ledgers_access']))==1)
+                            <li><a class="dropdown-item {{request()->is('accounting/ledgers') ? 'active' : ''}}" href="/">{{ __('ledgers.title') }}</a></li>
+                        @endif
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item {{request()->is('admin/settings/users*') ? 'active' : ''}}" href="/admin/settings/users">{{ __('global.menu.setup.sub.users') }}</a></li>
+
+                    </ul>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a href="/test" class="nav-link {{request()->is('test') ? 'active' : ''}}" data-toggle="tooltip" title="test">
                         <i class="bi bi-app fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">test</span>
