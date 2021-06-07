@@ -1,29 +1,11 @@
 @extends('layouts.admin')
 @section('title', 'Users Profile')
 @section('content')
-<header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
-    <div class="container-xl px-4">
-        <div class="page-header-content">
-            <div class="row align-items-center justify-content-between pt-3">
-                <div class="col-auto mb-3">
-                    <h1 class="page-header-title">
-                        <div class="page-header-icon"><i data-feather="user"></i></div>
-                        Account Settings - Profile
-                    </h1>
-                </div>
-            </div>
-        </div>
+<div class="card">
+    <div class="card-header">
+        User : Profile
     </div>
-</header>
-<!-- Main page content-->
-<div class="container-xl px-4 mt-4">
-    <!-- Account page navigation-->
-    <nav class="nav nav-borders">
-        <a class="nav-link active ms-0" href="/admin/users/profile">Profile</a>
-        <a class="nav-link" href="account-security.html">Security</a>
-        <a class="nav-link" href="account-notifications.html">Notifications</a>
-    </nav>
-    <hr class="mt-0 mb-4" />
+    <div class="card-body">
     <div class="row">
         <div class="col-xl-4">
             @livewire('admin.users.image')
@@ -53,8 +35,8 @@
                                 <!-- Form Group (first name)-->
 
                                     <label class="small mb-1" for="title">Title</label>
-                                    <select class="form-control form-control-sm @error('title') is-invalid @enderror" id="title" name="title">
-                                        @foreach (__('global.title') as $k=>$v )
+                                    <select class="form-select form-select-sm @error('title') is-invalid @enderror" id="title" name="title">
+                                        @foreach (__('employee_lookup.title') as $k=>$v )
                                         <option value="{{ $k }}" @if(auth()->user()->title == $k) selected @endif>({{ $k }}) {{ $v }}</option>
                                         @endforeach
                                     </select>
@@ -117,5 +99,10 @@
             </div>
         </div>
     </div>
+    </div>
+    <div class="card-footer">
+
+    </div>
 </div>
+
 @endsection

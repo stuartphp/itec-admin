@@ -23,6 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('selection/{id}', [App\Http\Controllers\HomeController::class, 'selection'])->name('selection');
 
 Route::prefix('admin')->middleware(['auth', 'web'])->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index']);
     Route::prefix('users')->group(function () {
         Route::get('profile', [App\Http\Controllers\Admin\Users\ProfileController::class, 'edit']);
     });
