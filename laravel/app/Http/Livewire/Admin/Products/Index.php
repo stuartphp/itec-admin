@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Products;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Product;
+use App\Models\ProductCategory;
 
 class Index extends Component
 {
@@ -25,6 +26,16 @@ class Index extends Component
     public function render()
     {
         $data = Product::where('company_id', session()->get('company_id'))->paginate($this->page_size);
-        return view('livewire.admin.products.index', compact('data'));
+        $categories = $this->getCategories();
+        return view('livewire.admin.products.index', compact('data', 'categories'));
+    }
+
+    public function getCategories()
+    {
+        return ProductCategory::where('company_id', session()->get('company_id'))
+                ->where('is_active', 1)
+                ->orderBy('parent_id', 'desc')
+                ->orderBy('name', 'asc')
+                ->get();
     }
 }

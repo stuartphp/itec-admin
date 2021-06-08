@@ -53,3 +53,4 @@
 		{{ $data->links() }}
 	</div>
 </div>
+
