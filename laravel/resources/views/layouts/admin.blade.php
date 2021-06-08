@@ -88,7 +88,7 @@
                         <li><a class="dropdown-item {{request()->is('admin/products/categories*') ? 'active' : ''}}" href="/admin/products/categories">{{ __('product_categories.title') }}</a></li>
                         @endif
                         @if(count(array_intersect(session()->get('grant'), ['SU','product_units']))==1)
-                        <li><a class="dropdown-item {{request()->is('admin/products/units*') ? 'active' : ''}}" href="/">{{ __('product_units.title') }}</a></li>
+                        <li><a class="dropdown-item {{request()->is('admin/products/units*') ? 'active' : ''}}" href="/admin/products/units">{{ __('product_units.title') }}</a></li>
                         @endif
                         <li>
                     </ul>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Products;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Validator;
 
 class ProductsController extends Controller
@@ -16,8 +17,10 @@ class ProductsController extends Controller
 
     public function create()
     {
-        return view('admin.products.form');
+        $categories = $this->getCategories();
+        return view('admin.products.form', compact('categories'));
     }
+
     public function store(Request $request)
     {
         $data = $request->all();
@@ -90,5 +93,14 @@ class ProductsController extends Controller
         Product::destroy($id);
         session()->flash('success', __('global.record_deleted'));
         return redirect()->back();
+    }
+
+    public function getCategories()
+    {
+        return ProductCategory::where('company_id', session()->get('company_id'))
+                ->where('is_active', 1)
+                ->orderBy('parent_id', 'desc')
+                ->orderBy('name', 'asc')
+                ->get();
     }
 }

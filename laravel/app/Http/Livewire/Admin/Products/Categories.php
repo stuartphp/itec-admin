@@ -26,11 +26,20 @@ class Categories extends Component
     {
         if($this->search>'')
         {
-            $data = ProductCategory::with('parent')->where('company_id', session()->get('company_id'))->where('name', 'like', '%'.$this->search.'%')->paginate($this->page_size);
+            $data = ProductCategory::where('product_categories.company_id', session()->get('company_id'))
+                ->join('product_categories as cat', 'cat.id', 'product_categories.parent_id')
+                ->where(function($q){
+                    $q->where('cat.name', 'like', '%'.$this->search.'%')
+                        ->orWhere('product_categories.name', 'like', '%'.$this->search.'%');
+                })
+                ->select('product_categories.name as name', 'cat.name as parent')
+                ->paginate($this->page_size);
         }else{
-            $data = ProductCategory::with('parent')->where('company_id', session()->get('company_id'))->orderBy('name', 'asc')->paginate($this->page_size);
+            $data = ProductCategory::where('product_categories.company_id', session()->get('company_id'))
+                ->join('product_categories as cat', 'cat.id', 'product_categories.parent_id')
+                ->select('product_categories.name as name', 'cat.name as parent')
+                ->orderBy('name', 'asc')->paginate($this->page_size);
         }
-// dd($data);
         return view('livewire.admin.products.categories', compact('data'));
     }
 }
