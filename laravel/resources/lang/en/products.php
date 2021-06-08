@@ -14,6 +14,7 @@ return [
         'product_category_id'   => 'Category',
         'product_code'          => 'Code',
         'name'                  => 'Name',
+        'slug'                  => 'Slug',
         'description'           => 'Description',
         'keywords'              => 'Keywords',
         'barcode'               => 'Bar Code',

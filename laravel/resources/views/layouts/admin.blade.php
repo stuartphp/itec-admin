@@ -75,11 +75,25 @@
                 </li>
                 @endif
                 @if(count(array_intersect(session()->get('grant'), ['SU','products']))==1)
-                <li class="nav-item ">
-                    <a class="nav-link {{request()->is('admin/products*') ? 'active' : ''}}" href="/admin/products"  data-toggle="tooltip" title="{{ __('global.menu.inventory.title') }}">
-                      <span><i class="bi bi-box fa-menu d-none d-sm-block"></i></span> <span class="d-block d-sm-none">{{ __('global.menu.inventory.title') }}</span>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown {{request()->is('admin/products*') ? 'active' : ''}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-toggle="tooltip" title="{{ __('global.menu.products.title') }}">
+                      <i class="bi bi-box fa-menu d-none d-sm-block"></i> <span class="d-block d-sm-none">{{ __('global.menu.products.title') }}</span>
                     </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @if(count(array_intersect(session()->get('grant'), ['SU','products']))==1)
+                        <li><a class="dropdown-item {{request()->is('admin/products/items*') ? 'active' : ''}}" href="/admin/products/items">{{ __('products.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','products_categories']))==1)
+                        <li><a class="dropdown-item {{request()->is('admin/products/categories*') ? 'active' : ''}}" href="/admin/products/categories">{{ __('product_categories.title') }}</a></li>
+                        @endif
+                        @if(count(array_intersect(session()->get('grant'), ['SU','product_units']))==1)
+                        <li><a class="dropdown-item {{request()->is('admin/products/units*') ? 'active' : ''}}" href="/">{{ __('product_units.title') }}</a></li>
+                        @endif
+                        <li>
+                    </ul>
                 </li>
+
                 @endif
                 <li class="nav-item">
                     <a class="nav-link dropdown {{request()->is('calendars/*') ? 'active' : ''}}" href="/calendars/data" data-toggle="tooltip" title="{{ __('global.menu.calendars.title') }}">
@@ -275,17 +289,15 @@
 <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{asset('vendors/select2/dist/js/select2.full.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 <script src="{{asset('js/moment.min.js')}}"></script>
 <script src="{{asset('vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
 <script src="{{ asset('js/accounting.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
     @livewireScripts
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+
 $('.nav-item').on('click', function () {
     $('#loadImg').toggle();
 });
@@ -328,7 +340,7 @@ $(document).on('inserted.bs.popover', function (event) {
         window.addEventListener('modal', event => {
             $('#' + event.detail.modal).modal(event.detail.action);
         });
-
+        @if(session()->has('success')) toastr['success']("{!! session()->get("success") !!}"); @endif
         function notice(type, title, message = '') {
             //var messageModal = document.getElementById('Message');
             switch (type) {
@@ -346,6 +358,21 @@ $(document).on('inserted.bs.popover', function (event) {
                 $('#Message').modal('hide');
             }, 4000);
         }
+function doAction(id, val){
+    switch(val)
+    {
+        case 'edit':
+            window.location.href='{{ request()->url() }}/'+id+'/edit';
+            break;
+        case 'delete':
+            $('#message-title').html('{{ __('global.delete') }}');
+            $('#message-body').html('{{ __('global.confirm_delete') }}<br><br><div class="text-center"><b>Everything will be deleted!</b></div>')
+            $('#message-footer').html('<div class="text-end"><form action="{{ request()->url() }}/'+id+'" method="POST"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="_method" value="DELETE"><button class="btn btn-danger btn-sm" type="submit">{{ __('global.delete') }}</button></form></div>');
+            $('#Message').modal('show');
+            break;
+    }
+    $('#action_'+id).val('');
+}
 </script>
 @yield('scripts')
 

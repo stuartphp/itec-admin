@@ -15,4 +15,9 @@ class ProductCategory extends Model
         'parent_id',
         'is_active'
     ];
+
+    public function parent()
+    {
+        return $this->hasOne(ProductCategory::class, 'id', 'parent_id');
+    }
 }

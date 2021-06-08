@@ -9,9 +9,10 @@
 
 return [
 	'title'=>'Categories',
+    'parent' => 'Parent',
 	'fields'=>[
-		'main_category'		=>'Main Category',
-		'sub_category'		=>'Sub Category',
+		'name'		    =>'Name',
+		'parent_id'		=>'Parent',
 		'is_active'		=>'Is Active',
 	]
 ];
