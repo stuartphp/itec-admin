@@ -9,10 +9,10 @@
                 <div class="card-body p-5 text-center">
                     <div class="h3 fw-light mb-3">Sign In</div>
                     <!-- Social login links-->
-                    <a class="btn btn-icon btn-facebook mx-1" href="#!"><i class="fab fa-facebook-f fa-fw fa-sm"></i></a>
-                    <a class="btn btn-icon btn-github mx-1" href="#!"><i class="fab fa-github fa-fw fa-sm"></i></a>
-                    <a class="btn btn-icon btn-google mx-1" href="#!"><i class="fab fa-google fa-fw fa-sm"></i></a>
-                    <a class="btn btn-icon btn-twitter mx-1" href="#!"><i class="fab fa-twitter fa-fw fa-sm text-white"></i></a>
+                    <a href="#!"><i class="bi bi-facebook fa-3x"></i></a>
+                    <a class="btn btn-icon btn-github mx-1" href="#!"><i class="bi bi-github"></i></a>
+                    <a class="btn btn-icon btn-google mx-1" href="#!"><i class="bi bi-google"></i></a>
+                    <a class="btn btn-icon btn-twitter mx-1" href="#!"><i class="bi bi-twitter"></i></a>
                 </div>
                 <hr class="my-0" />
                 <div class="card-body p-5">

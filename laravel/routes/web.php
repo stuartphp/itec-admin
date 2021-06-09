@@ -29,6 +29,7 @@ Route::prefix('admin')->middleware(['auth', 'web'])->group(function () {
     });
     Route::prefix('products')->group(function(){
         Route::resource('/items', \App\Http\Controllers\Admin\Products\ProductsController::class);
+        Route::get('/detail/{id}', [\App\Http\Controllers\Admin\Products\DetailController::class, 'index']);
         Route::resource('/categories', \App\Http\Controllers\Admin\Products\ProductCategoriesController::class);
         Route::resource('/units', \App\Http\Controllers\Admin\Products\UnitsController::class);
     });

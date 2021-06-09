@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet"/>
     <link href="{{asset('vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <link href="{{asset('vendors/summernote/summernote-lite.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/custom.css')}}?<?php echo md5(time())?>" rel="stylesheet" />
     @livewireStyles
     @yield('css')
@@ -289,9 +291,9 @@
 <script src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{asset('vendors/select2/dist/js/select2.full.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 <script src="{{asset('js/moment.min.js')}}"></script>
 <script src="{{asset('vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="{{asset('vendors/summernote/summernote-lite.min.js')}}"></script>
 <script src="{{ asset('js/accounting.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
     @livewireScripts
@@ -304,6 +306,13 @@ $('.nav-item').on('click', function () {
 let add='{{ __('global.add_new_record') }}';
 let update='{{ __('global.update') }}';
 let sideMenu=350;
+function openNav() {
+    document.getElementById("mySidenav").style.width = ""+sideMenu+"px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
 $(document).on("show.bs.modal", '.modal', function (event) {
     console.log("Global show.bs.modal fire");
     var zIndex = 100000 + (10 * $(".modal:visible").length);

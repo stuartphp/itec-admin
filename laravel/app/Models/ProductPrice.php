@@ -26,4 +26,13 @@ class ProductPrice extends Model
         'special_to',
 
     ];
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'store_id', 'id');
+    }
+
+    public function items()
+    {
+        return $this->belongsTo(Product::class, 'product_id','id' );
+    }
 }

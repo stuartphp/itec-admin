@@ -11,6 +11,7 @@ class ProductUnit extends Model
     protected $table = 'product_units';
     protected $fillable = [
         'company_id',
-        'name'
+        'name',
+        'is_active'
     ];
 }

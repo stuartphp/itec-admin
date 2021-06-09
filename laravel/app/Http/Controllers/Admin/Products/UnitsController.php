@@ -48,7 +48,7 @@ class UnitsController extends Controller
         }
         ProductUnit::create($data);
         session()->flash('success', __('global.record_added'));
-        return redirect('/admin/folder/file');
+        return redirect('/admin/products/units');
     }
 
     /**
@@ -93,7 +93,7 @@ class UnitsController extends Controller
         $rec = ProductUnit::findOrFail($id);
         $rec->update($data);
         session()->flash('success', __('global.record_updated'));
-        return redirect('/admin/folder/file');
+        return redirect('/admin/products/units');
     }
 
     /**

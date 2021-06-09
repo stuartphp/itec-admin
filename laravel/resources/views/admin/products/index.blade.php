@@ -1,5 +1,17 @@
 @extends('layouts.admin')
 @section('title', 'Products')
 @section('content')
-@livewire('admin.products.index')
+<div>
+    @livewire('admin.products.search')
+    Show dashboard
+</div>
+@endsection
+@section('scripts')
+<script>
+
+
+    $(document).ready(function(){
+        openNav();
+    });
+</script>
 @endsection

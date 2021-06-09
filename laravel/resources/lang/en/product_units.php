@@ -11,5 +11,6 @@ return [
 	'title'=>'Units',
 	'fields'=>[
 		'name'		=>'Name',
+        'is_active' =>'Is Active'
 	]
 ];

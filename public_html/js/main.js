@@ -103,19 +103,4 @@ $.ajaxSetup({
     }
 });
 
-function notice(type, title, message='', time=1500) {
-    if(type==='error')
-    {
-        time=4000;
-    }
-    Swal.fire({
-        position: 'top-end',
-        toast: true,
-        title:title,
-        html:message,
-        icon: type,
-        showCloseButton: true,showConfirmButton: false,
-        timer: time
-    });
-}
 
