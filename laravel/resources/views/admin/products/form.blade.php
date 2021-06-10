@@ -1,11 +1,9 @@
-@extends('layouts.admin')
-@section('title', 'products')
-@section('content')
+
     <form method="POST" action="/admin/products/items{{ isset($data) ? '/' . $data->id : '' }}"
         enctype="multipart/form-data">
         @csrf
         @if (isset($data)) <input type="hidden" name="_method" value="PUT" /> @endif
-        <div class="card">
+        <div class="card mt-3">
             <div class="card-header"><a href="/admin/products/items">{{ __('products.title') }}</a> /
                 {{ isset($data) ? __('global.update') : __('global.add_new_record') }}</div>
             <div class="card-body">
@@ -318,8 +316,8 @@
             </div>
         </div>
     </form>
-@endsection
-@section('scripts')
+
+@push('scripts')
 <script>
     $(document).ready(function() {
         $('#description').summernote({
@@ -338,4 +336,4 @@
     });
 
 </script>
-@endsection
+@endpush

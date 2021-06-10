@@ -63,7 +63,7 @@
                                     <div class="list-group-item text-center">{{ $item->special_from ?? '-' }}</div>
                                     <div class="list-group-item text-center">{{ $item->special_to ?? '-' }}</div>
                                     <div class="list-group-item"><select class="form-select form-select-sm"
-                                        wire:change="loadModal($event.target.value, {{ $item->id }})" id="action_{{ $item->id }}" onchange="setTimeout(()=>{ $('#action_{{$item->id}}').val('');},1000)">
+                                        wire:change="loadModal($event.target.value, {{ $item }})" id="action_{{ $item->id }}" onchange="setTimeout(()=>{ $('#action_{{$item->id}}').val('');},1000)">
                                             <option value="">{{ __('global.select') }}</option>
                                             <option value="copy">{{ __('global.copy') }}</option>
                                             <option value="edit">{{ __('global.edit') }}</option>
@@ -77,7 +77,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="priceModal" wire:ignore.self>
+    <div class="modal fade" id="priceModal">
         <div class="modal-dialog @if($action != 'delete') modal-xl @endif">
             <div class="modal-content">
                 <div class="modal-header">
@@ -89,7 +89,7 @@
                     <div class="mb-2  row">
                         <label class="col-md-2">{{ __('product_prices.fields.store_id') }}</label>
                         <div class="col-md-2">
-                            <select wire:model="store_id" id="store_id" class="form-select">
+                            <select wire:model.defer="state.store_id" id="store_id" class="form-select">
                                 <option value="">{{ __('global.select') }}</option>
                                 @foreach ($stores as $k => $v)
                                     <option value="{{ $k }}">{{ $v }}</option>
@@ -98,51 +98,28 @@
                         </div>
                         <label class="col-md-2">{{ __('product_prices.fields.price_list1') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="price_list1" id="price_list1"
+                            <input type="text" wire:model.defer="state.price_list1" id="price_list1"
                                 class="form-control form-control-sm">
                         </div>
-                        <label class="col-md-2">{{ __('product_prices.fields.special') }}</label>
-                        <div class="col-md-2">
-                            <input type="text" wire:model="special" id="special" class="form-control form-control-sm">
-                        </div>
+
                     </div>
                     <div class="mb-2  row">
                         <label class="col-md-2">{{ __('product_prices.fields.cost_price') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="cost_price" id="cost_price"
+                            <input type="text" wire:model.defer="state.cost_price" id="cost_price"
                                 class="form-control form-control-sm">
                         </div>
                         <label class="col-md-2">{{ __('product_prices.fields.price_list2') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="price_list2" id="price_list2"
+                            <input type="text" wire:model.defer="state.price_list2" id="price_list2"
                                 class="form-control form-control-sm">
                         </div>
-                        <label class="col-md-2">{{ __('product_prices.fields.special_from') }}</label>
-                        <div class="col-md-2">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-                              </div>
-                            <div class="input-group" id="dateSpecial_from" data-target-input="nearest">
-                                <input
-                                    type="text"
-                                    wire:model.defer="special_from"
-                                    data-target:="#dateSpecial_from"
-                                    id="special_from"
-                                    class="form-control form-control-sm datetime"
-                                    onchange='$emit("selectDate", this.value)'
-                                    >
-                                <div class="input-group-append" data-target:="#dateSpecial_from" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="bi bi-calendar"></i></div>
-                                </div>
-                            </div>
 
-                        </div>
                     </div>
                     <div class="mb-2  row">
                         <label class="col-md-2">{{ __('product_prices.fields.retail') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="retail" id="retail"
+                            <input type="text" wire:model.defer="state.retail" id="retail"
                                 class="form-control form-control-sm @error('retail') is-invalid @enderror">
                             @error('retail')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -150,36 +127,62 @@
                         </div>
                         <label class="col-md-2">{{ __('product_prices.fields.price_list3') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="price_list3" id="price_list3"
+                            <input type="text" wire:model.defer="state.price_list3" id="price_list3"
                                 class="form-control form-control-sm">
                         </div>
-                        <label class="col-md-2">{{ __('product_prices.fields.special_to') }}</label>
-                        <div class="col-md-2">
-                            <input type="text" wire:model="special_to" id="special_to"
-                                class="form-control form-control-sm datetime">
-                        </div>
+
                     </div>
                     <div class="mb-2  row">
                         <label class="col-md-2">{{ __('product_prices.fields.dealer') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="dealer" id="dealer" class="form-control form-control-sm">
+                            <input type="text" wire:model.defer="state.dealer" id="dealer" class="form-control form-control-sm">
                         </div>
                         <label class="col-md-2">{{ __('product_prices.fields.price_list4') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="price_list4" id="price_list4"
+                            <input type="text" wire:model.defer="state.price_list4" id="price_list4"
                                 class="form-control form-control-sm">
                         </div>
                     </div>
                     <div class="mb-2  row">
                         <label class="col-md-2">{{ __('product_prices.fields.whole_sale') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="whole_sale" id="whole_sale"
+                            <input type="text" wire:model.defer="state.whole_sale" id="whole_sale"
                                 class="form-control form-control-sm">
                         </div>
                         <label class="col-md-2">{{ __('product_prices.fields.price_list5') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model="price_list5" id="price_list5"
+                            <input type="text" wire:model.defer="state.price_list5" id="price_list5"
                                 class="form-control form-control-sm">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
+                        <div class="col-md-4">
+                            <label>{{ __('product_prices.fields.special') }}</label>
+                            <div>
+                                <input type="text" wire:model.defer="state.special" id="special" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>{{ __('product_prices.fields.special_from') }}</label>
+                            <div>
+                                <x-datepicker wire:model.defer="state.special_from" id="special_from" :error="'special_from'"/>
+                                @error('special_from')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>{{ __('product_prices.fields.special_to') }}</label>
+                            <div>
+                            <x-datepicker wire:model.defer="state.special_to" id="special_to" :error="'special_to'"/>
+                                @error('special_to')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                 </div>

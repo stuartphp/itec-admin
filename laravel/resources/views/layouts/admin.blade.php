@@ -11,11 +11,18 @@
     <link href="{{asset('vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <link href="{{asset('vendors/summernote/summernote-lite.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/custom.css')}}?<?php echo md5(time())?>" rel="stylesheet" />
     @livewireStyles
     @yield('css')
-
+    @stack('css')
+    <style>
+.pika-single
+{
+z-index: 110050 !important;
+}
+</style>
 </head>
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -296,6 +303,7 @@
 <script src="{{asset('vendors/summernote/summernote-lite.min.js')}}"></script>
 <script src="{{ asset('js/accounting.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
     @livewireScripts
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
@@ -303,8 +311,8 @@
 $('.nav-item').on('click', function () {
     $('#loadImg').toggle();
 });
-let add='{{ __('global.add_new_record') }}';
-let update='{{ __('global.update') }}';
+let add="{{ __('global.add_new_record') }}";
+let update="{{ __('global.update') }}";
 let sideMenu=350;
 function openNav() {
     document.getElementById("mySidenav").style.width = ""+sideMenu+"px";
@@ -384,6 +392,6 @@ function doAction(id, val){
 }
 </script>
 @yield('scripts')
-
+@stack('scripts')
 </body>
 </html>

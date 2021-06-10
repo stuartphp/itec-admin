@@ -1,6 +1,6 @@
 @extends('layouts.admin')
+@section('title', 'Product Detail')
 @section('content')
-
     @livewire('admin.products.search')
     <a href="#" onclick="openNav()" style="position: absolute; top:45px; left:15px; z-index:1000"><i class="bi bi-list"></i></a>
     <nav class="navbar navbar-expand-lg navbar-light" id="items_nav" style="background-color: #EDF1ED">
@@ -30,9 +30,8 @@
     </nav>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="detail-tab">
-            Product
+            @include('admin.products.form')
         </div>
-
         <div class="tab-pane fade" id="prices" role="tabpanel" aria-labelledby="prices-tab">
             @livewire('admin.products.prices', ['id'=>$data->id])
         </div>
@@ -61,6 +60,6 @@ Activities
             $('#loadImg').hide();
         },500);
     });
-    
+
 </script>
 @endsection
