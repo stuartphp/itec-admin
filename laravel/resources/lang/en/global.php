@@ -165,8 +165,8 @@ return [
     'users'=>[
         'title'=>'Users Management',
     ],
-    'inventory' =>[
-        'title'=>'Inventory',
+    'products' =>[
+        'title'=>'Products',
     ],
     'payroll' =>[
         'title'=>'Payroll',

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-@section('titile', "product_categories")
+@section('title', "product_categories")
 @section('content')
-@livewire('admin.products.categories')
+<div class="container-md">
+    @livewire('admin.products.categories')
+</div>
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('title', 'Users Profile')
 @section('content')
+<div class="container">
 <div class="card">
     <div class="card-header">
         User : Profile
@@ -105,4 +106,5 @@
     </div>
 </div>
 
+</div>
 @endsection
