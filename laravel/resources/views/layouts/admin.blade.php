@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet"/>
     <link href="{{asset('vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <link href="{{asset('vendors/summernote/summernote-lite.min.css')}}" rel="stylesheet" />
@@ -18,7 +19,7 @@
     @yield('css')
     @stack('css')
     <style>
-.pika-single
+.flatpickr-calendar
 {
 z-index: 110050 !important;
 }
@@ -300,6 +301,7 @@ z-index: 110050 !important;
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 <script src="{{asset('js/moment.min.js')}}"></script>
 <script src="{{asset('vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="{{asset('vendors/summernote/summernote-lite.min.js')}}"></script>
 <script src="{{ asset('js/accounting.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>

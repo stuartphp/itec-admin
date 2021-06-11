@@ -17,6 +17,7 @@ class Prices extends Component
     public $modal_btn;
     public $row_id;
     public $state=[];
+    public $price;
 
     public function mount($id)
     {
@@ -27,14 +28,21 @@ class Prices extends Component
         $this->prices = ProductPrice::with(['store'])->where('product_id', $id)->get();
     }
 
-    public function loadModal($action, $price)
+    public function createModal()
     {
+        $this->resetValidation();
+        $this->dispatchBrowserEvent('modal', ['modal'=>'priceModal', 'action'=>'show']);
+    }
+
+    public function loadModal($action, ProductPrice $price)
+    {
+        $this->price = $price;
         switch($action)
         {
             case 'edit':
                 $this->action='update';
                 $this->row_id = $price['id'];
-                $this->state = $price;
+                $this->state = $price->toArray();
                 break;
         }
         $this->dispatchBrowserEvent('modal', ['modal'=>'priceModal', 'action'=>'show']);
@@ -42,18 +50,20 @@ class Prices extends Component
 
     public function recordAction()
     {
-        dd($this->state);
+        $validatedData = Validator::make($this->state,
+            [
+                'product_id' =>'required',
+                'store_id' =>'required',
+                'price_list1' =>'required',
+                'cost_price' =>'required',
+                'retail' =>'required',
+            ])->validate();
+
         switch($this->action)
         {
             case 'update':
-                Validator::make($this->state,
-                [
-                    'product_id' =>'required',
-                    'store_id' =>'required',
-                    'retail' =>'required',
-                ]
-            );
-                $price = $this->state;
+                $this->price->update($validatedData);
+                $this->dispatchBrowserEvent('modal', ['modal'=>'priceModal', 'action'=>'hide']);
                 break;
         }
     }

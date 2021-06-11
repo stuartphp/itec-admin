@@ -5,7 +5,7 @@
                 <div class="col-7">{{ __('product_prices.title') }}&nbsp;<div wire:loading class="text-warning">Loading...</div></div>
                 <div class="col-5">
                     <div class="row">
-                        <div class="col-1"><a href="#" wire:click.prevent="loadModal('add', 0)"><i class="bi bi-plus"></i></a></div>
+                        <div class="col-1"><a href="#" wire:click.prevent="createModal"><i class="bi bi-plus"></i></a></div>
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="priceModal">
+    <div class="modal fade" id="priceModal" wire:ignore.self>
         <div class="modal-dialog @if($action != 'delete') modal-xl @endif">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,16 +98,25 @@
                         </div>
                         <label class="col-md-2">{{ __('product_prices.fields.price_list1') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model.defer="state.price_list1" id="price_list1"
-                                class="form-control form-control-sm">
+                            <x-input-text id="price_list1" wire:model.defer="state.price_list1"/>
                         </div>
 
                     </div>
                     <div class="mb-2  row">
                         <label class="col-md-2">{{ __('product_prices.fields.cost_price') }}</label>
                         <div class="col-md-2">
-                            <input type="text" wire:model.defer="state.cost_price" id="cost_price"
-                                class="form-control form-control-sm">
+
+                            <input wire:model.defer="state.cost_price"
+    type="text"
+    class="form-control form-control-sm @error('cost_price') is-invalid @enderror"
+    id="cost_price"
+    name="cost_price" />
+{{-- @error('cost_price')
+    <span class="invalid-feedback"
+        role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror --}}
                         </div>
                         <label class="col-md-2">{{ __('product_prices.fields.price_list2') }}</label>
                         <div class="col-md-2">
