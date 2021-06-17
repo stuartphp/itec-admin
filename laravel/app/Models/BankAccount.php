@@ -14,7 +14,9 @@ class BankAccount extends Model
         'ledger_code',
         'bank',
         'branch',
+        'branch_code', //*
         'account_name',
         'account_number',
+        'is_default' //*
     ];
 }

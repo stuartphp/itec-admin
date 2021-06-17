@@ -2,7 +2,7 @@
 @section('title', 'Product Detail')
 @section('content')
     @livewire('admin.products.search')
-    <a href="#" onclick="openNav()" style="position: absolute; top:45px; left:15px; z-index:1000"><i class="bi bi-list"></i></a>
+    <a href="#" onclick="openNav()" style="position: absolute; top:45px; left:15px; z-index:1000"><x-icon-list/></i></a>
     <nav class="navbar navbar-expand-lg navbar-light" id="items_nav" style="background-color: #EDF1ED">
         <div class="container-fluid">
            <div class="navbar-brand ps-3">{{ $data->product_code }} : {{ $data->name }}</div>

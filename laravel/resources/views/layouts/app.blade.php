@@ -9,6 +9,7 @@
         <title>iTec Assist @yield('title')</title>
         <link rel="stylesheet" href="{{ asset('vendors/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet"/>
         <link rel="stylesheet" href="{{ asset('vendors/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet"/>
+        <link href="{{asset('css/custom.css')}}?<?php echo md5(time())?>" rel="stylesheet" />
     </head>
     <body>
         <div id="layoutAuthentication">
