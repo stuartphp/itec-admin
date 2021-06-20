@@ -55,17 +55,17 @@ class Prices extends Component
                 'product_id' =>'required',
                 'store_id' =>'required',
                 'price_list1' =>'required',
-                'cost_price' =>'required',
                 'retail' =>'required',
             ])->validate();
 
         switch($this->action)
         {
             case 'update':
-                $this->price->update($validatedData);
+                $this->price->update($this->state);
                 $this->dispatchBrowserEvent('modal', ['modal'=>'priceModal', 'action'=>'hide']);
                 break;
         }
+        
     }
 
     public function render()
