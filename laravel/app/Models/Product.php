@@ -18,18 +18,8 @@ class Product extends Model
         'keywords',
         'barcode',
         'isbn_number',
-        'unit',
-        'currency',
-        'allow_tax',
-        'weight_gram',
-        'length_cm',
-        'width_cm',
-        'height_cm',
-        'expiry_date',
+        'product_unit_id',
         'main_image',
-        'purchase_tax_type',
-        'sales_tax_type',
-        'sales_commission_item',
         'viewed',
         'is_service',
         'is_active',
@@ -42,16 +32,7 @@ class Product extends Model
 
     public function units()
     {
-        return $this->hasOne(ProductUnit::class, 'id', 'unit');
-    }
-
-    public function purchase_tax()
-    {
-        return $this->hasOne(TaxType::class, 'number', 'purchase_tax_type');
-    }
-    public function sales_tax()
-    {
-        return $this->hasOne(TaxType::class, 'number', 'sales_tax_type');
+        return $this->hasOne(ProductUnit::class, 'id', 'product_unit_id');
     }
 
     public function prices()

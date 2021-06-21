@@ -11,7 +11,7 @@ class ProductReview extends Model
     protected $table = 'product_reviews';
     protected $fillable = [
         'product_id',
-        'entity_id',
+        'created_by_id',
         'action_date',
         'alias',
         'rating',

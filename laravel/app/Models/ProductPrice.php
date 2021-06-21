@@ -24,7 +24,10 @@ class ProductPrice extends Model
         'special',
         'special_from',
         'special_to',
-
+        'allow_tax',
+        'purchase_tax_type',
+        'sales_tax_type',
+        'sales_commission_item'
     ];
     public function store()
     {
@@ -34,5 +37,13 @@ class ProductPrice extends Model
     public function items()
     {
         return $this->belongsTo(Product::class, 'product_id','id' );
+    }
+    public function purchase_tax()
+    {
+        return $this->hasOne(TaxType::class, 'number', 'purchase_tax_type');
+    }
+    public function sales_tax()
+    {
+        return $this->hasOne(TaxType::class, 'number', 'sales_tax_type');
     }
 }

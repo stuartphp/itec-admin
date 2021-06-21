@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductMovement extends Model
+class ProductSize extends Model
 {
     use HasFactory;
-    protected $table = 'product_movements';
+    protected $table = 'product_sizes';
     protected $fillable = [
         'product_id',
-        'document_id',
-        'adtion_date',
-        'up',
-        'down'
+        'weight',
+        'length',
+        'width',
+        'height',
+        'expiry_date'
     ];
 }
