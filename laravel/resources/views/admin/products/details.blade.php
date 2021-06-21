@@ -12,18 +12,22 @@
             $('#loadImg').hide();
         },500);
     });
+    $('.select2').select2({
+        dropdownParent: $('#formModal')
+    });
     $(document).ready(function() {
         $('#description').summernote({
+            dialogsInBody: true,
             tabsize: 2,
-            height: 140,
+            height: 157,
             toolbar: [
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['table', ['table']],
-                ['insert', ['link', 'picture']],
-                ['view', ['help']]
+               // ['insert', ['link', 'picture']],
+               // ['view', ['help']]
             ]
         });
     });

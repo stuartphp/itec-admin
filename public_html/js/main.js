@@ -56,20 +56,6 @@ $(function () {
   //   week: {dow: 1} // Monday is the first day of the week
   // })
 
-    $('.date').datetimepicker({
-        format: 'YYYY-MM-DD',
-        locale: 'en'
-    })
-
-    $('.datetime').datetimepicker({
-        format: 'YYYY-MM-DD HH:mm:ss',
-        locale: 'en',
-        sideBySide: true
-    })
-
-    $('.timepicker').datetimepicker({
-        format: 'HH:mm:ss'
-    });
   $('.select').select2();
 
   $('.select-all').click(function () {
