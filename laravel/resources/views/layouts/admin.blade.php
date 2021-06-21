@@ -9,10 +9,8 @@
      <link rel="stylesheet" href="{{ asset('vendors/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet"/>
     <link href="{{asset('vendors/select2/dist/css/select2.min.css')}}" rel="stylesheet">
-    <link href="{{asset('vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     <link href="{{asset('vendors/summernote/summernote-lite.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/custom.css')}}?<?php echo md5(time())?>" rel="stylesheet" />
     @livewireStyles
@@ -274,22 +272,7 @@ z-index: 110050 !important;
         @yield('content')
     </div>
 </div>
-<div class="modal" tabindex="-1" id="Message">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="message-title"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="message-body">
 
-            </div>
-            <div class="card-footer" id="message-footer">
-
-            </div>
-        </div>
-    </div>
-</div>
 <form id="logoutform" action="{{ url('logout') }}" method="POST" style="display: none;">
     {{ csrf_field() }}
 </form>
@@ -300,12 +283,10 @@ z-index: 110050 !important;
 <script src="{{asset('vendors/select2/dist/js/select2.full.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 <script src="{{asset('js/moment.min.js')}}"></script>
-<script src="{{asset('vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="{{asset('vendors/summernote/summernote-lite.min.js')}}"></script>
 <script src="{{ asset('js/accounting.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
     @livewireScripts
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
@@ -377,21 +358,6 @@ $(document).on('inserted.bs.popover', function (event) {
                 $('#Message').modal('hide');
             }, 4000);
         }
-function doAction(id, val){
-    switch(val)
-    {
-        case 'edit':
-            window.location.href='{{ request()->url() }}/'+id+'/edit';
-            break;
-        case 'delete':
-            $('#message-title').html('{{ __('global.delete') }}');
-            $('#message-body').html('{{ __('global.confirm_delete') }}<br><br><div class="text-center"><b>Everything will be deleted!</b></div>')
-            $('#message-footer').html('<div class="text-end"><form action="{{ request()->url() }}/'+id+'" method="POST"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="_method" value="DELETE"><button class="btn btn-danger btn-sm" type="submit">{{ __('global.delete') }}</button></form></div>');
-            $('#Message').modal('show');
-            break;
-    }
-    $('#action_'+id).val('');
-}
 </script>
 @yield('scripts')
 @stack('scripts')

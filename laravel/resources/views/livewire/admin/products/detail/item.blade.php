@@ -1,9 +1,8 @@
 <div>
-    @livewire('admin.products.search')
-    <a href="#" onclick="openNav()" style="position: absolute; top:45px; left:15px; z-index:1000"><i class="bi bi-list"></i></a>
+<a href="#" onclick="openNav()" style="position: absolute; top:45px; left:15px; z-index:1000"><x-icon-list style="width: 20px"/></i></a>
     <nav class="navbar navbar-expand-lg navbar-light" id="items_nav" style="background-color: #EDF1ED">
         <div class="container-fluid">
-           <div class="navbar-brand"></div>
+           <div class="navbar-brand ps-3"></div>
         <ul class="nav nav-pills" id="detailTab">
         <li class="nav-item">
           <a class="nav-link active" id="detail-tab" data-bs-toggle="tab" href="#detail" role="tab" aria-controls="detail" aria-selected="true">Details</a>
@@ -26,5 +25,27 @@
         </li>
       </ul>
     </nav>
-    <div id="result" wire.model="result"></div>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+
+        </div>
+        <div class="tab-pane fade" id="prices" role="tabpanel" aria-labelledby="prices-tab">
+
+        </div>
+        <div class="tab-pane fade" id="options" role="tabpanel" aria-labelledby="options-tab">
+Options
+       </div>
+        <div class="tab-pane fade" id="levels" role="tabpanel" aria-labelledby="levels-tab">
+Levels
+        </div>
+        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+Images
+        </div>
+
+        <div class="tab-pane fade" id="activities" role="tabpanel" aria-labelledby="activities-tab">
+Activities
+        </div>
+
+
+      </div>
 </div>
