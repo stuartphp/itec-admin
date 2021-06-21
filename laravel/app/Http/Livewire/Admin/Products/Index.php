@@ -6,29 +6,28 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductUnit;
 
 class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    // Standard
-    public $page_size;
-    public $action;
-    public $search;
-    protected $queryString = ['search'=>['except'=>''], 'page'=>['except'=>1]];
+    public $product=[];
 
-    public function mount()
+    public function mount($id)
     {
-        $this->search='';
-        $this->page_size=12;
+        $this->product = Product::where('company_id', session()->get('company_id'))->find($id)->toArray();
+        
     }
 
     public function render()
     {
-        $data = Product::where('company_id', session()->get('company_id'))->paginate($this->page_size);
-        $categories = $this->getCategories();
-        return view('livewire.admin.products.index', compact('data', 'categories'));
+        return view('livewire.admin.products.index', [
+            'product'=>$this->product,
+            'categories'=>$this->getCategories(),
+            'units' =>$this->getUnits()]);
     }
+
 
     public function getCategories()
     {
@@ -37,5 +36,13 @@ class Index extends Component
                 ->orderBy('parent_id', 'desc')
                 ->orderBy('name', 'asc')
                 ->get();
+    }
+    public function getUnits()
+    {
+        return ProductUnit::where('company_id', session()->get('company_id'))
+                ->where('is_active', 1)
+                ->orderBy('name', 'asc')
+                ->pluck('name', 'id')
+                ->toArray();
     }
 }
