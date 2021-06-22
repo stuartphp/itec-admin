@@ -46,9 +46,10 @@ class ProductsController extends Controller
     }
     public function show($id)
     {
-        $data = Product::where('company_id',session()->get('company_id'))->where('id', $id)->first();
-        return view('admin.products.show', compact('data'));
+        $data = Product::with(['category', 'units'])->where('company_id',session()->get('company_id'))->where('id', $id)->first();
+        return response()->json($data);
     }
+
     public function edit($id)
     {
         $data = Product::where('company_id',session()->get('company_id'))->where('id', $id)->first();

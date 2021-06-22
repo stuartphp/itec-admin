@@ -16,7 +16,7 @@ class DetailController extends Controller
         $categories = $this->getCategories();
 
         $data = Product::with(['category', 'units'])->where('company_id', session()->get('company_id'))->where('id', $id)->first();
-        return view('admin.products.details', compact('data', 'categories', 'units'));
+        return view('admin.products.details', compact('data', 'units', 'categories'));
     }
 
     public function getCategories()
